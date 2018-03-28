@@ -1,0 +1,2 @@
+module ChatControlHelper
+end
