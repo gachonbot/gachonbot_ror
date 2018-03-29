@@ -1,11 +1,14 @@
 class BasicController < ApplicationController
     def keyboard_init
-        @msg =
-            {
-              type: "buttons",
-              buttons: ["선택 1", "선택 2", "선택 3"]
+        @msg = {
+              message: {
+                  text: "안녕하세요 가천대학교 봇입니다!"
+              },
+              keyboard: {
+                type: "text"
+              }
             }
-        render json: @msg, status: :ok
+            render json: @msg, status: :ok
     end
     
     def chat_control
