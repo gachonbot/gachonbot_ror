@@ -1,13 +1,8 @@
 class BasicController < ApplicationController
     def keyboard_init
         @msg = {
-              message: {
-                  text: "안녕하세요 가천대학교 봇입니다!"
-              },
-              keyboard: {
                 type: "text"
               }
-            }
             render json: @msg, status: :ok
     end
     
