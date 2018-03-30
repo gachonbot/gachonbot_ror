@@ -33,7 +33,7 @@ class BasicController < ApplicationController
            info = doc.css('#toggle-view > li:nth-child(1) > dl > dd:nth-child(2)')
             @msg = {
               message: {
-                  text: "#{info.text.gsub('\r', '\r\n')}"
+                  text: "#{info.text.gsub("\r", "\r\n")}"
               },
               keyboard: {
                 type: "text",
