@@ -1,3 +1,7 @@
+require 'nokogiri'
+require 'rest-client'
+
+
 class BasicController < ApplicationController
     def keyboard_init
        @msg =
@@ -33,5 +37,21 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
         end
+        if @response == "학식"
+          url = 'http://m.gachon.ac.kr/menu/menu.jsp?gubun=A'
+          page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.css('#toggle-view > li:nth-child(1) > dl > dd:nth-child(2)')
+            @msg = {
+              message: {
+                  text: "#{info.text}"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+          end
+        end
 end
-end
+
