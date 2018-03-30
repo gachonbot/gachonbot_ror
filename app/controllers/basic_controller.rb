@@ -14,21 +14,21 @@ class BasicController < ApplicationController
     
     def exchange_day(day)
       case day
-      when "Monday"    #compare to 1
-        day = "월요일"
+      when "Monday"   
         @day_value = 1
-      when "Tuesday"    #compare to 2
-        day = "화요일"
+        day = "월요일"
+      when "Tuesday"    
         @day_value = 2
+        day = "화요일"
       when "Wednesday"
-        day = "수요일"
         @day_value = 3
+        day = "수요일"
       when "Thursday"
-        day= "목요일"
         @day_value = 4
+        day= "목요일"
       when "Friday"
-        day = "금요일"
         @day_value = 5
+        day = "금요일"
       end
     end
     
@@ -53,11 +53,11 @@ class BasicController < ApplicationController
               },
               keyboard: {
                 type: "buttons",
-                buttons: ["예술대학 학식", "교육대학원 학식", "비전타워 학식"]
+                buttons: ["예술대학", "교육대학원", "비전타워"]
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "예술대학 학식"
+            elsif @response == "예술대학"
             url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
@@ -71,7 +71,7 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "교육대학원 학식"
+            elsif @response == "교육대학원"
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
@@ -85,7 +85,7 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "비전타워 학식"
+            elsif @response == "비전타워"
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
