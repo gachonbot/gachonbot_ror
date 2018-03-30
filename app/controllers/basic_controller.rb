@@ -3,7 +3,7 @@ class BasicController < ApplicationController
         @msg = {
                 message: {
                   text: "안녕하세요 가천대학교 챗봇입니다!"
-                },
+                }
                 type: "text"
               }
             render json: @msg, status: :ok
