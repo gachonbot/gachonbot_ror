@@ -11,7 +11,22 @@ class BasicController < ApplicationController
             }
         render json: @msg, status: :ok
     end
-      
+    
+    def exchange_day(day)
+      case day
+      when "Monday"    #compare to 1
+        day = "월요일"
+      when "Tuesday"    #compare to 2
+        day = "화요일"
+      when "Wednesday"
+        day = "수요일"
+      when "Thursday"
+        day= "목요일"
+      when "Friday"
+        day = "금요일"
+      end
+    end
+    
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
