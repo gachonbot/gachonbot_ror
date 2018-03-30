@@ -26,18 +26,7 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-        else
-            @msg = {
-              message: {
-                  text: "잘못된 명령어를 입력하셨습니다."
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-        end
-        if @response == "학식"
+        elsif @response == "학식"
           url = 'http://m.gachon.ac.kr/menu/menu.jsp?gubun=A'
           page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
@@ -51,7 +40,16 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-          end
+        else
+            @msg = {
+              message: {
+                  text: "잘못된 명령어를 입력하셨습니다."
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
         end
-end
+        end
 
