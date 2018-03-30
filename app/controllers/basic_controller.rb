@@ -13,7 +13,7 @@ class BasicController < ApplicationController
     end
     
     def exchange_day(@day)
-      case @day # a_variable is the variable we want to compare
+      case @day
       when "Monday"    #compare to 1
         @day = "월요일"
       when "Tuesday"    #compare to 2
@@ -26,8 +26,6 @@ class BasicController < ApplicationController
         @day = "금요일"
       end
       
-    end
-    
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
