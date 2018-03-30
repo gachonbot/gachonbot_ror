@@ -1,48 +1,24 @@
 class BasicController < ApplicationController
     def keyboard_init
-        @msg = {
-                message: {
-                  text: "안녕하세요 가천대학교 챗봇입니다!"
-                },
-                type: "text"
-              }
-            render json: @msg, status: :ok
+       @msg =
+            {
+              type: "buttons",
+              buttons: ["시작하기"]
+            }
+        render json: @msg, status: :ok
     end
     
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
         
-        if @response == "선택 1"
+        if @response == "시작하기"
             @msg = {
               message: {
-                  text: "선택 1을 누르셨습니다. user_key: #{@user_key}"
+                  text: "안녕하세요 가천대학교 봇입니다! 궁금하신게 있으시면 다 대답해 드립니다! 대표적인 명령어는 명령어 보여줘! 로 확인 가능합니다!"
               },
               keyboard: {
-                type: "buttons",
-                buttons: ["선택 1", "선택 2", "선택 3"]
-              }
-            }
-            render json: @msg, status: :ok
-        elsif @response == "선택 2"
-            @msg = {
-              message: {
-                  text: "선택 2를 누르셨습니다."
-              },
-              keyboard: {
-                type: "buttons",
-                buttons: ["선택 1", "선택 2", "선택 3"]
-              }
-            }
-            render json: @msg, status: :ok
-        elsif @response == "선택 3"
-            @msg = {
-              message: {
-                  text: "선택 3을 누르셨습니다."
-              },
-              keyboard: {
-                type: "buttons",
-                buttons: ["선택 1", "선택 2", "선택 3"]
+                type: "text",
               }
             }
             render json: @msg, status: :ok
@@ -52,12 +28,10 @@ class BasicController < ApplicationController
                   text: "잘못된 명령어를 입력하셨습니다."
               },
               keyboard: {
-                type: "buttons",
-                buttons: ["선택 1", "선택 2", "선택 3"]
+                type: "text",
               }
             }
             render json: @msg, status: :ok
         end
-    end
 end
-
+end
