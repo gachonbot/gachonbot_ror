@@ -81,19 +81,6 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-          url = 'http://m.gachon.ac.kr/menu/menu.jsp?gubun=A'
-          page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = doc.css('#toggle-view > li:nth-child(1) > dl > dd:nth-child(2)')
-            @msg = {
-              message: {
-                  text: "#{info.text.gsub("\r", "\r\n")}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
             elsif @response.include? "시간"
             @msg = {
               message: {
