@@ -16,14 +16,19 @@ class BasicController < ApplicationController
       case day
       when "Monday"    #compare to 1
         day = "월요일"
+        @day_value = 1
       when "Tuesday"    #compare to 2
         day = "화요일"
+        @day_value = 2
       when "Wednesday"
         day = "수요일"
+        @day_value = 3
       when "Thursday"
         day= "목요일"
+        @day_value = 4
       when "Friday"
         day = "금요일"
+        @day_value = 5
       end
     end
     
@@ -48,24 +53,32 @@ class BasicController < ApplicationController
               },
               keyboard: {
                 type: "buttons",
-                buttons: ["창조관 학식", "아름관 학식", "비전타워 학식"]
+                buttons: ["예술대학 학식", "교육대학원 학식", "비전타워 학식"]
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "창조관 학식"
+            elsif @response == "예술대학 학식"
+            url ="http://m.gachon.ac.kr/menu/menu.jsp"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl/dd[1]')
             @msg = {
               message: {
-                  text: "#{Time.now}"
+                  text: "#{info.text.gsub("\r", "\r\n")}"
               },
               keyboard: {
                 type: "text",
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "아름관 학식"
+            elsif @response == "교육대학원 학식"
+            url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl')
             @msg = {
               message: {
-                  text: "#{Time.now}"
+                  text: "#{info.text.gsub("\r", "\r\n")}"
               },
               keyboard: {
                 type: "text",
@@ -73,9 +86,13 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             elsif @response == "비전타워 학식"
+            url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl')
             @msg = {
               message: {
-                  text: "#{Time.now}"
+                  text: "#{info.text.gsub("\r", "\r\n")}"
               },
               keyboard: {
                 type: "text",
