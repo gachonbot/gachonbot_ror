@@ -52,4 +52,5 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok
         end
         end
+      end
 
