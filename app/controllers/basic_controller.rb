@@ -61,7 +61,7 @@ class BasicController < ApplicationController
             url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl/dd[1]')
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{day_value}]/dl/dd[1]")
             @msg = {
               message: {
                   text: "#{info.text.gsub("\r", "\r\n")}"
@@ -75,7 +75,7 @@ class BasicController < ApplicationController
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl')
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@day_value}]/dl")
             @msg = {
               message: {
                   text: "#{info.text.gsub("\r", "\r\n")}"
@@ -89,7 +89,7 @@ class BasicController < ApplicationController
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath('//*[@id="toggle-view"]/li[@day_value]/dl')
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@day_value}]/dl")
             @msg = {
               message: {
                   text: "#{info.text.gsub("\r", "\r\n")}"
