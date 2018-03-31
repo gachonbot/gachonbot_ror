@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'rest-client'
-
+require 'httparty'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -110,9 +110,11 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
         else
+          resp = httparty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526
+&lc=ko&ft=1.0&text=#{@response}")
             @msg = {
               message: {
-                  text: "잘못된 명령어를 입력하셨습니다."
+                  text: resp.response
               },
               keyboard: {
                 type: "text",
