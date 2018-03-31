@@ -116,11 +116,11 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
         else
-          resp = httparty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526
+          resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526
 &lc=en&ft=1.0&text=#{@response}")
             @msg = {
               message: {
-                  text: resp.response
+                  text: resp.body
               },
               keyboard: {
                 type: "text",
