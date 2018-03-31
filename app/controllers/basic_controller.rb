@@ -29,6 +29,12 @@ class BasicController < ApplicationController
       when "Friday"
         @@day_value = 5
         day = "금요일"
+      when "Saturday"
+        @@day_value = 6
+        day = "토요일"
+      when "Sunday"
+        @@day_value = 7
+        day = "일요일"        
       end
     end
     
@@ -111,7 +117,7 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok
         else
           resp = httparty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526
-&lc=ko&ft=1.0&text=#{@response}")
+&lc=en&ft=1.0&text=#{@response}")
             @msg = {
               message: {
                   text: resp.response
