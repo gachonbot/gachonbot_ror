@@ -115,6 +115,16 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+            elsif @response == "170516"
+            @msg = {
+              message: {
+                  text: "현지야사랑해"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
         else
           resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
             @msg = {
