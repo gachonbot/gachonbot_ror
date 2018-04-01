@@ -116,8 +116,7 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
         else
-          resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526
-&lc=ko&ft=1.0&text=#{params[:content]}")
+          resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{@response.encode("Windows-1252", invalid: :replace, undef: :replace)}")
             @msg = {
               message: {
                   text: resp.body
@@ -128,5 +127,5 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
         end
-      end
+    end
 end
