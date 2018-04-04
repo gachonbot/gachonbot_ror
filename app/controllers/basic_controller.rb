@@ -130,10 +130,7 @@ class BasicController < ApplicationController
             end
             @msg = {
               message: {
-                  text: "\n 열람실\t\t\t\t\t\t\t잔여좌석\n\n#{for i in (0..5)
-                  puts @seatname[i]+"\t\t\t\t"+@seatinfo[i]+"\n"
-                  end
-                  }"
+                  text: "\n 열람실\t\t\t\t\t\t\t잔여좌석\n\n#{@seatname[0]}\t\t\t\t\t#{@seatinfo[0]}\n#{@seatname[1]}\t\t\t\t\t#{@seatinfo[1]}\n#{@seatname[2]}\t\t\t\t\t#{@seatinfo[2]}\n#{@seatname[3]}\t\t\t\t\t#{@seatinfo[3]}\n#{@seatname[4]}\t\t\t\t\t#{@seatinfo[4]}\n"
               },
               keyboard: {
                 type: "text",
