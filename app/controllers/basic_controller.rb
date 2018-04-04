@@ -131,10 +131,7 @@ class BasicController < ApplicationController
             @msg = {
               message: {
                   text: "\n 열람실\t\t\t\t\t잔여좌석\n
-                  #{for i in 0..4
-                  seatname[i]+seatinfo[i]
-                  end}
-                  "
+                  #{seatname[0]}"
               },
               keyboard: {
                 type: "text",
