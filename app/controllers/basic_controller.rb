@@ -124,7 +124,7 @@ class BasicController < ApplicationController
            doc = Nokogiri::HTML(page)
            seatinfo = Array.new
            for i in 1...5
-           seatinfo << doc.xpath("//*[@id=\"mainContents\"]/div/div/div/table/tbody/tr[#{i}]/td[6]")
+           seatinfo << doc.xpath("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue")
             end
             @msg = {
               message: {
