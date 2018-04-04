@@ -113,12 +113,13 @@ class BasicController < ApplicationController
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
             @msg = {
               message: {
-                  text: "#{info.text.gsub("\r", "\n")}"
+                  text: "ddd"
               },
               keyboard: {
                 type: "text",
               }
             }
+            ##{info.text.gsub("\r", "\n")}
             elsif @response.include? "중앙도서관 자리"
             url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
             page = RestClient.get(url)
