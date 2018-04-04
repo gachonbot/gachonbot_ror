@@ -122,15 +122,17 @@ class BasicController < ApplicationController
             url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
+           seatname = Array.new
            seatinfo = Array.new
            for i in 1...5
-           seatinfo << doc.xpath("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue")
+           seatname << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.left")
+           seatinfo << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue")
             end
             @msg = {
               message: {
                   text: "\n 열람실\t\t\t\t\t잔여좌석\n
                   #{for i in 0..4
-                  puts seatinfo[i]
+                  puts seatname[i]+"\t\t\t"+seatinfo[i]
                   end
                   }"
               },
