@@ -113,7 +113,7 @@ class BasicController < ApplicationController
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
             @msg = {
               message: {
-                  text: "#{@month}월의 학사일정 입니다. \n #{info.text.gsub("\r", "\n")}"
+                  text: "#{info.text.gsub("\r", "\n")}"
               },
               keyboard: {
                 type: "text",
