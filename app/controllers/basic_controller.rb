@@ -105,21 +105,6 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response.include? "학사일정"
-            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           @month = Date.today.strftime("%m")
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
-            @msg = {
-              message: {
-                  text: "ddd"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            ##{info.text.gsub("\r", "\n")}
             elsif @response.include? "중앙도서관 자리"
             url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
             page = RestClient.get(url)
@@ -139,6 +124,20 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+            elsif @response.include? "학사일정"
+            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           @month = Date.today.strftime("%m")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
+            @msg = {
+              message: {
+                  text: "#{info.text.gsub("\r", "\n")}"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
             elsif @response.include? "시간"
             @msg = {
               message: {
