@@ -125,14 +125,14 @@ class BasicController < ApplicationController
            seatname = Array.new
            seatinfo = Array.new
            for i in 1...5
-           seatname << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.left")
-           seatinfo << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue")
+           seatname << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.left").text
+           seatinfo << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue").text
             end
             @msg = {
               message: {
                   text: "\n 열람실\t\t\t\t\t잔여좌석\n
                   #{for i in 0..4
-                  puts seatname[i]+"\t\t\t"+seatinfo[i]
+                  seatname[i]+"\t\t\t"+seatinfo[i]
                   end
                   }"
               },
