@@ -130,7 +130,7 @@ class BasicController < ApplicationController
             end
             @msg = {
               message: {
-                  text: "\n 열람실\t\t\t\t\t\t\t잔여좌석\n\n#{for i in 0..5
+                  text: "\n 열람실\t\t\t\t\t\t\t잔여좌석\n\n#{for i in (0..5)
                   @seatname[i]+"\t\t\t\t"+@seatinfo[i]+"\n"
                   end
                   }"
