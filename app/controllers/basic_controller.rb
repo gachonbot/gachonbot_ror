@@ -124,7 +124,7 @@ class BasicController < ApplicationController
            doc = Nokogiri::HTML(page)
            @seatname = Array.new
            @seatinfo = Array.new
-           for i in 1...5
+           for i in 1..5
            @seatname << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.left").text
            @seatinfo << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue").text
             end
