@@ -120,6 +120,19 @@ class BasicController < ApplicationController
                 type: "text",
               }
             }
+            elsif @response.include? "중앙도서관 자리"
+            url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath('//*[@id="mainContents"]/div/div/div/table/tbody/tr[1]/td[4]')
+            @msg = {
+              message: {
+                  text: "\n 열람실\t전체좌석\t사용좌석\t잔여좌석\n형설열람실\t120"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
             render json: @msg, status: :ok
             elsif @response.include? "시간"
             @msg = {
