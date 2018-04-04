@@ -37,9 +37,7 @@ class BasicController < ApplicationController
         day = "일요일"        
       end
     end
-    
-    #학사일정http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395
-    #//*[@id="toggle-view"]/li[1]/div
+
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
@@ -124,10 +122,17 @@ class BasicController < ApplicationController
             url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath('//*[@id="mainContents"]/div/div/div/table/tbody/tr[1]/td[4]')
+           seatinfo = Array.new
+           for i in 1...5
+           seatinfo << doc.xpath("//*[@id=\"mainContents\"]/div/div/div/table/tbody/tr[#{i}]/td[6]")
+            end
             @msg = {
               message: {
-                  text: "\n 열람실\t전체좌석\t사용좌석\t잔여좌석\n형설열람실\t120"
+                  text: "\n 열람실\t\t\t\t\t잔여좌석\n
+                  #{for i in 0..4
+                  puts seatinfo[i]
+                  end
+                  }"
               },
               keyboard: {
                 type: "text",
