@@ -109,10 +109,11 @@ class BasicController < ApplicationController
             url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{Date.today.strftime("%m")}]/div")
+           @month = Date.today.strftime("%m")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
             @msg = {
               message: {
-                  text: "#{Date.today.strftime("%m")}월의 학사일정 입니다. \n #{info.text.gsub("\r", "\r\n")}"
+                  text: "#{@month}월의 학사일정 입니다. \n #{info.text.gsub("\r", "\n")}"
               },
               keyboard: {
                 type: "text",
