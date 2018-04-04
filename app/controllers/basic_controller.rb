@@ -38,6 +38,8 @@ class BasicController < ApplicationController
       end
     end
     
+    #학사일정http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395
+    #//*[@id="toggle-view"]/li[1]/div
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
@@ -96,6 +98,20 @@ class BasicController < ApplicationController
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
+            @msg = {
+              message: {
+                  text: "#{info.text.gsub("\r", "\r\n")}"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response == "학사일정"
+            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{Date.today.strftime("%m")}]/div")
             @msg = {
               message: {
                   text: "#{info.text.gsub("\r", "\r\n")}"
