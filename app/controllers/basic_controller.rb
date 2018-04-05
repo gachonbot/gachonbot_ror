@@ -158,7 +158,7 @@ class BasicController < ApplicationController
                         end
             @msg = {
               message: {
-                  text: "하이"
+                  text: "#{@route}"
               },
               keyboard: {
                 type: "text",
