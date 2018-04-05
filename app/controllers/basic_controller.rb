@@ -125,14 +125,14 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             elsif @response.include? "학사일정"
-            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           @month = Date.today.strftime("%m")
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
+            #url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
+            #page = RestClient.get(url)
+           #doc = Nokogiri::HTML(page)
+           #@month = Date.today.strftime("%m")
+           #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
             @msg = {
               message: {
-                  text: "#{info.text.gsub("\r", "\n")}"
+                  text: "학사일정"
               },
               keyboard: {
                 type: "text",
