@@ -149,6 +149,20 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+            elsif @response.include? "!지하철 "
+            @destination = @response.delete("!지하철 ")
+            resp = HTTParty.get("http://swopenapi.seoul.go.kr/api/subway/56475774517475673131345a4c714e70/json/shortestRoute/1/5/#{CGI.escape("가천대")}/#{CGI.escape(@destination)}")
+            @msg = {
+              message: {
+                  text: resp.parsed_response["shortestRouteList"].each do |x|
+                            x["shtStatnNm"]
+                          end
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
             elsif @response == "170516"
             @msg = {
               message: {
