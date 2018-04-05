@@ -182,15 +182,17 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response.include? "날씨"
+             elsif @response.include? "날씨"
               resp = HTTParty.get("https://api2.sktelecom.com/weather/current/hourly?version=1&lat=37.450745&lon=127.128804&appkey=af357d39-420c-49b0-ac22-d29381aa2a9b")
               resp.parsed_response["weather"]["hourly"].each do |x|
                 @name = x["sky"]["name"]
                 @tc =  x["temperature"]["tc"].to_i.round
+                @tmin =  x["temperature"]["tmin"].to_i.round
+                @tmax =  x["temperature"]["tmax"].to_i.round
               end            
               @msg = {
               message: {
-                  text: "현재 가천대의 날씨입니다!\n기상 : #{@name}\n온도 : #{@tc} 도"
+                  text: "현재 가천대의 날씨입니다!\n기상 : #{@name}\n현재온도 : #{@tc}도\n최저기온 : #{@tmin}도\n최고기온 : #{@tmax}도"
               },
               keyboard: {
                 type: "text",
@@ -201,6 +203,46 @@ class BasicController < ApplicationController
             @msg = {
               message: {
                   text: "현지야사랑해"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response.include? "흡연구역"
+            @msg = {
+              message: {
+                  text: "교내 흡연구역은 공과대학2 정자 앞, 바이오나노연구원 4층 뒷문, 공과대학2 매점 앞, 가천관 가는 계단 앞, 바이오나노대학 건물 뒤편, 교육대학원 2층 옆, 중앙도서관 매점 앞, 주차장 공중전화 부스 앞, 학생회관 오른쪽 주차장 위, 일반대학원 정문 오른쪽, 예술대학1 분수대 옆, 예술대학2 1층 출입문 옆, 학군단 건물 구석, 글로벌센터 농구장 앞, IT대학 벤치 뒤 입니다!"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response.include? "샤워실"
+            @msg = {
+              message: {
+                  text: "샤워실은 산학협력관 5층, 가천관 B1층, IT대학 4층, 공과대학 1층, 학생회관 2층,4층(여자), 바이오나노대학 2,4층(여자), 3층, 종합운동장에 있습니다!"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response.include? "ATM"
+            @msg = {
+              message: {
+                  text: "\n신한은행 : 법과대학 1층, 비전타워 1층, 가천관 2층, 중앙도서관 1층\n국민은행 : 제2공학관 4층, 가천관 B1층\n우체국 은행 : 법과대학 1층"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response.include? "편의점"
+            @msg = {
+              message: {
+                  text: "가천관 2층(세븐일레븐), 공과대학2 4층, 프리덤광장(세븐일레븐), 비전타워A동(세븐일레븐), 비전타워B동(세븐일레븐), 예술대학1 1층, 중앙도서관 지하1층에 ٩(ᐛ)و "
               },
               keyboard: {
                 type: "text",
