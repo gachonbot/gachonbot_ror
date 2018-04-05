@@ -158,7 +158,7 @@ class BasicController < ApplicationController
                         end
             @msg = {
               message: {
-                  text: "#{@destination}까지는 #{@routeMSG}\n경로 : #{@route.delete(" ")}"
+                  text: "#{@destination}까지는 #{@routeMSG}\n\n경로 : #{@route.delete(" ").gsub(",", "->")}"
               },
               keyboard: {
                 type: "text",
