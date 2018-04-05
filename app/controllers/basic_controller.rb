@@ -170,7 +170,7 @@ class BasicController < ApplicationController
               @route = Array.new
               @routeMSG = Array.new
                 resp.parsed_response["realtimeArrivalList"].each do |x|
-                  @route << x["updnLine"]
+                  @route << x["trainLineNm"]
                   @routeMSG << x["arvlMsg2"]
                 end
             @msg = {
@@ -182,7 +182,37 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+            elsif @response.include? "날씨"
+              resp = HTTParty.get("https://api2.sktelecom.com/weather/current/hourly?version=1&lat=37.450745&lon=127.128804&appkey=af357d39-420c-49b0-ac22-d29381aa2a9b")
+              resp.parsed_response["weather"]["hourly"].each do |x|
+                name = x["sky"]["name"]
+                tc =  x["temperature"]["tc"].to_i.round
+              end            
+              @msg = {
+              message: {
+                  text: "현재 가천대의 날씨입니다!\n기상 : #{name}\n온도 : #{tc} 도"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
             elsif @response == "170516"
+            @msg = {
+              message: {
+                  text: "현지야사랑해"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            elsif @response.include? "날씨"
+            resp = HTTParty.get("https://api2.sktelecom.com/weather/current/hourly?version=1&lat=37.450745&lon=127.128804&appkey=af357d39-420c-49b0-ac22-d29381aa2a9b")
+             resp.parsed_response["realtimeArrivalList"].each do |x|
+                  @route << x["trainLineNm"]
+                  @routeMSG << x["arvlMsg2"]
+                end
             @msg = {
               message: {
                   text: "현지야사랑해"
