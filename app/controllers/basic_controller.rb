@@ -155,7 +155,7 @@ class BasicController < ApplicationController
             @msg = {
               message: {
                   text: resp.parsed_response["shortestRouteList"].each do |x|
-                            x["shtStatnNm"]
+                          puts x["shtStatnNm"]
                           end
               },
               keyboard: {
