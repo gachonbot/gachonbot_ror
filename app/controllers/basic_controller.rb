@@ -185,8 +185,8 @@ class BasicController < ApplicationController
             elsif @response.include? "날씨"
               resp = HTTParty.get("https://api2.sktelecom.com/weather/current/hourly?version=1&lat=37.450745&lon=127.128804&appkey=af357d39-420c-49b0-ac22-d29381aa2a9b")
               resp.parsed_response["weather"]["hourly"].each do |x|
-                name = x["sky"]["name"]
-                tc =  x["temperature"]["tc"].to_i.round
+                @name = x["sky"]["name"]
+                @tc =  x["temperature"]["tc"].to_i.round
               end            
               @msg = {
               message: {
