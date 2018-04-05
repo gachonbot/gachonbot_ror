@@ -190,7 +190,7 @@ class BasicController < ApplicationController
               end            
               @msg = {
               message: {
-                  text: "현재 가천대의 날씨입니다!\n기상 : #{name}\n온도 : #{tc} 도"
+                  text: "현재 가천대의 날씨입니다!\n기상 : #{@name}\n온도 : #{@tc} 도"
               },
               keyboard: {
                 type: "text",
