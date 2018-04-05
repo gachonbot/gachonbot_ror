@@ -154,9 +154,9 @@ class BasicController < ApplicationController
             resp = HTTParty.get("http://swopenapi.seoul.go.kr/api/subway/56475774517475673131345a4c714e70/json/shortestRoute/1/5/#{CGI.escape("가천대")}/#{CGI.escape(@destination)}")
             @msg = {
               message: {
-                  text: resp.parsed_response["shortestRouteList"].each do |x|
+                  text: "#{resp.parsed_response["shortestRouteList"].each do |x|
                           puts x["shtStatnNm"]
-                          end
+                          end}"
               },
               keyboard: {
                 type: "text",
