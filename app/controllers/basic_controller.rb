@@ -124,20 +124,21 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response.include? "학사일정"
-            #url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
-            #page = RestClient.get(url)
-           #doc = Nokogiri::HTML(page)
-           #@month = Date.today.strftime("%m")
-           #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
+            elsif @response == "학사일정"
+            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           @month = Date.today.strftime("%m")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
             @msg = {
               message: {
                   text: "학사일정"
               },
               keyboard: {
-                type: "text",
+                type: "#{@month}월의 학사일정 입니다.\n#{info.text.gsub("\r", "\n")}",
               }
             }
+            render json: @msg, status: :ok
             elsif @response.include? "시간"
             @msg = {
               message: {
