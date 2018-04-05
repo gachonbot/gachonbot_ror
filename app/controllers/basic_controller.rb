@@ -175,9 +175,9 @@ class BasicController < ApplicationController
                 end
             @msg = {
               message: {
-                  text: for num in 1..5
-                  @route[num]
-                  @routeMSG[num]
+                  text: for num in 0..2
+                  puts @route[num]
+                  puts @routeMSG[num]
                 end
               },
               keyboard: {
