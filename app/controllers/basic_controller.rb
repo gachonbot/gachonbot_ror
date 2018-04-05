@@ -175,10 +175,7 @@ class BasicController < ApplicationController
                 end
             @msg = {
               message: {
-                  text: for num in 0..2
-                  puts @route[num]
-                  puts @routeMSG[num]
-                end
+                  text: "#{@route[0]}\n#{@routeMSG[0]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n"
               },
               keyboard: {
                 type: "text",
