@@ -152,11 +152,13 @@ class BasicController < ApplicationController
             elsif @response.include? "!지하철 "
             @destination = @response.delete("!지하철 ")
             resp = HTTParty.get("http://swopenapi.seoul.go.kr/api/subway/56475774517475673131345a4c714e70/json/shortestRoute/1/5/#{CGI.escape("가천대")}/#{CGI.escape(@destination)}")
+            resp.parsed_response["shortestRouteList"].each do |x|
+                          route = x["shtStatnNm"]
+                          routeMSG = x["shtTransferMsg"]
+                        end
             @msg = {
               message: {
-                  text: "#{resp.parsed_response["shortestRouteList"].each do |x|
-                          puts x["shtStatnNm"]
-                          end}"
+                  text: "#{@destination}까지 가는 경로입니다!\n#{route}\n#{routeMSG}"
               },
               keyboard: {
                 type: "text",
