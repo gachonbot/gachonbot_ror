@@ -337,7 +337,7 @@ class BasicController < ApplicationController
         elsif @response.include? "카페"&&"교내"
             @msg = {
               message: {
-                  text: "IT대학앞 세븐일레븐옆에 파스쿠치, 가천관2층에 Grazie, 프리덤광장에 투썸플레이스, 카페로가 있습니다! ٩(ᐛ)و "
+                  text: "IT대학앞 세븐일레븐옆에 파스쿠치, 가천관2층에 Grazie, 프리덤광장에 투썸플레이스, 카페로가 있습니다!\n٩(ᐛ)و "
               },
               keyboard: {
                 type: "text",
@@ -360,7 +360,7 @@ class BasicController < ApplicationController
         elsif @response == "장학복지팀"
             @msg = {
               message: {
-                  text: Phone.find_by(name:"장학복지팀").number
+                  text: Phone.all
               },
               keyboard: {
                 type: "text",
