@@ -59,11 +59,11 @@ class BasicController < ApplicationController
               },
               keyboard: {
                 type: "buttons",
-                buttons: ["예술대학 학식", "교육대학원 학식", "비전타워 학식"]
+                buttons: [" 예술대학 ", " 교육대학원 ", " 비전타워 "]
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "예술대학 학식"
+            elsif @response == " 예술대학 "
             url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
@@ -77,7 +77,7 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "교육대학원 학식"
+            elsif @response == " 교육대학원 "
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
@@ -91,7 +91,7 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            elsif @response == "비전타워 학식"
+            elsif @response == " 비전타워 "
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
