@@ -346,7 +346,7 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok
             
         #개발자정보
-        elsif @response == "개발자" || "만든사람"
+        elsif @response == "개발자"
             @msg = {
               message: {
                   text: "가천대학교 컴퓨터공학과 14\n한승우\n010-9939-4434\ntuguri8@gmail.com"
@@ -357,7 +357,7 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
-            elsif @response == "장학복지팀"
+        elsif @response == "장학복지팀"
             @msg = {
               message: {
                   text: "#{Phone.find_by(name:"장학복지팀").number}"
