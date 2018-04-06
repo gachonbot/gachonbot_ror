@@ -54,23 +54,6 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
-        #지도보기
-        elsif @response.include? "지도"
-          @msg = {
-              message: {
-                  text: "캠퍼스 지도입니다!"
-              },
-              "message_button": {
-                                "label": "지도보기",
-                                "url": "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
-              }
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
         elsif @response.include? "학식"
