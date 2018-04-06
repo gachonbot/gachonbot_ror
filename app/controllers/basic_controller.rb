@@ -54,8 +54,7 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
-        #오늘의 학식 기능
-        #가천대학교 홈페이지 크롤링
+        #지도보기
         elsif @response.include? "지도"
           @msg = {
               message: {
@@ -66,8 +65,7 @@ class BasicController < ApplicationController
                                 "url": "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
               },
               keyboard: {
-                type: "buttons",
-                buttons: [" 예술대학", " 교육대학원", " 비전타워"]
+                type: "text",
               }
             }
             render json: @msg, status: :ok
