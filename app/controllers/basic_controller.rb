@@ -127,6 +127,18 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+        
+        #지도
+        elsif @response == "지도"
+          @msg = {
+              message: {
+                  text: "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
                     
         #중앙도서관 자리 조회 기능
         #가천대학교 홈페이지 크롤링
