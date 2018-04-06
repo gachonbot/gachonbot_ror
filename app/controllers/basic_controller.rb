@@ -360,7 +360,7 @@ class BasicController < ApplicationController
         elsif @response == "장학복지팀"
             @msg = {
               message: {
-                  text: "#{Phone.find_by(name:"장학복지팀").number}"
+                  text: Phone.find_by(name:"장학복지팀").number
               },
               keyboard: {
                 type: "text",
