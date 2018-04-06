@@ -7,7 +7,7 @@ class BasicController < ApplicationController
        @msg =
             {
               type: "buttons",
-              buttons: ["시작하기"]
+              buttons: ["안녕!"]
             }
         render json: @msg, status: :ok
     end
@@ -43,13 +43,31 @@ class BasicController < ApplicationController
         @response = params[:content]
         @user_key = params[:user_key]
         
-        if @response == "시작하기"
+        if @response == "안녕!"
             @msg = {
               message: {
                   text: "안녕하세요 가천대학교 봇입니다! 어떤 말이든 다 대답해 드립니다! 대표적인 명령어는 명령어 보여줘! 로 확인 가능합니다! 즐거운 #{exchange_day(Date.today.strftime("%A"))} 되세요!"
               },
               keyboard: {
                 type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
+        #오늘의 학식 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "지도"
+          @msg = {
+              message: {
+                  text: "캠퍼스 지도입니다!"
+              },
+              "message_button": {
+                                "label": "지도보기",
+                                "url": "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
+              },
+              keyboard: {
+                type: "buttons",
+                buttons: [" 예술대학", " 교육대학원", " 비전타워"]
               }
             }
             render json: @msg, status: :ok
