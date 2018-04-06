@@ -345,6 +345,29 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
+        #개발자정보
+        elsif @response == "개발자" || "만든사람"
+            @msg = {
+              message: {
+                  text: "가천대학교 컴퓨터공학과 14\n한승우\n010-9939-4434\ntuguri8@gmail.com"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
+            elsif @response == "장학복지팀"
+            @msg = {
+              message: {
+                  text: "#{Phone.find_by(name:"장학복지팀").number}"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
         #심심이 API
         else
           resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
