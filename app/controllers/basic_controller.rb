@@ -142,7 +142,7 @@ class BasicController < ApplicationController
                     
         #중앙도서관 자리 조회 기능
         #가천대학교 홈페이지 크롤링
-        elsif @response.include? "중앙도서관 자리"
+        elsif @response.include? "중앙도서관" && "자리"
             url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
