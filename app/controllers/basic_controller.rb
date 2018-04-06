@@ -368,6 +368,17 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
+            elsif @response == "이길여"
+            @msg = {
+              message: {
+                  text: "총장님사랑해요"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
         #심심이 API
         else
           resp = HTTParty.get("http://sandbox.api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
