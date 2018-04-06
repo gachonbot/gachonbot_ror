@@ -63,6 +63,7 @@ class BasicController < ApplicationController
               "message_button": {
                                 "label": "지도보기",
                                 "url": "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
+              }
               },
               keyboard: {
                 type: "text",
