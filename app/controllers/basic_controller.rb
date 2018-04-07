@@ -362,7 +362,7 @@ class BasicController < ApplicationController
           @a.save
             @msg = {
               message: {
-                  text: "#{@a.number}"
+                  text: "#{puts @a.number}"
               },
               keyboard: {
                 type: "text",
