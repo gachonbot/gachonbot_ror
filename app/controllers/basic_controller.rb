@@ -358,10 +358,10 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok
             
         elsif @response == "장학복지팀"
-          #@a = Phone.find_by(name:"장학복지팀").number.to_s
+          @a = Phone.find_or_create_by(name: "장학복지팀")
             @msg = {
               message: {
-                  text: Phone.number
+                  text: "#{@a.number}"
               },
               keyboard: {
                 type: "text",
