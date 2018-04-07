@@ -359,9 +359,10 @@ class BasicController < ApplicationController
             
         elsif @response == "장학복지팀"
           @a = Phone.find_or_create_by(name: "장학복지팀")
+          @a.save
             @msg = {
               message: {
-                  text: "#{@a.number.to_s}"
+                  text: "#{@a.number}"
               },
               keyboard: {
                 type: "text",
