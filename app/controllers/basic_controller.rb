@@ -361,7 +361,7 @@ class BasicController < ApplicationController
           #@a = Phone.find_by(name:"장학복지팀").number.to_s
             @msg = {
               message: {
-                  text: puts Phone.number
+                  text: Phone.number
               },
               keyboard: {
                 type: "text",
