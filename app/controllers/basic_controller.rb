@@ -194,9 +194,9 @@ class BasicController < ApplicationController
               message: {
                   text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n"
               },
-              "message_button": {
-               "label": "공지사항 바로가기.",
-                "url": "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
+              message_button: {
+               label: "공지사항 바로가기.",
+                url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
               },
               keyboard: {
                 type: "text",
