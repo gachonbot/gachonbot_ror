@@ -180,6 +180,30 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
+        #학사일정 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "공지사항"
+            url ="http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = Array.new
+            for i in 4..8 do
+             info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a/text()").text.strip
+              end
+            @msg = {
+              message: {
+                  text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n"
+              },
+              message_button: {
+               label: "공지사항 바로가기.",
+                url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
         #현재시간을 나타내주는 기능  
         elsif @response.include? "시간"
             @msg = {
@@ -350,19 +374,6 @@ class BasicController < ApplicationController
             @msg = {
               message: {
                   text: "가천대학교 컴퓨터공학과 14\n한승우\n010-9939-4434\ntuguri8@gmail.com"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
-        elsif @response == "장학복지팀"
-          @a = Phone.find_or_create_by(name: "장학복지팀")
-          @a.save
-            @msg = {
-              message: {
-                  text: "#{puts @a.number}"
               },
               keyboard: {
                 type: "text",
