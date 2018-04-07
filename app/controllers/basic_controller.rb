@@ -361,7 +361,7 @@ class BasicController < ApplicationController
           @a = Phone.find_or_create_by(name: "장학복지팀")
             @msg = {
               message: {
-                  text: "#{@a.number}"
+                  text: "#{@a.number.to_s}"
               },
               keyboard: {
                 type: "text",
