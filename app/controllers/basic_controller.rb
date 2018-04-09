@@ -131,7 +131,7 @@ class BasicController < ApplicationController
             
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링
-        elsif @response.include == "지도"
+        elsif @response == "지도"
             @msg = {
               message: {
                   text: "캠퍼스 지도입니다!",
