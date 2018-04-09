@@ -195,7 +195,7 @@ class BasicController < ApplicationController
            info = Array.new
             for i in 1..5 do
              info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a/text()").text.strip
-              end
+            end
             @msg = {
               message: {
                   text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n",
