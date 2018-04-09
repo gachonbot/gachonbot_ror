@@ -127,12 +127,18 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-        
-        #지도
-        elsif @response == "지도"
-          @msg = {
+            
+            
+        #지도 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include == "지도"
+            @msg = {
               message: {
-                  text: "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
+                  text: "캠퍼스 지도입니다!",
+              message_button: {
+               label: "캠퍼스지도 보러가기.",
+                url: "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
+              }
               },
               keyboard: {
                 type: "text",
@@ -180,14 +186,14 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
-        #학사일정 조회 기능
+        #공지사항 조회 기능
         #가천대학교 홈페이지 크롤링
         elsif @response.include? "공지사항"
             url ="http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = Array.new
-            for i in 4..8 do
+            for i in 1..5 do
              info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a/text()").text.strip
               end
             @msg = {
@@ -196,6 +202,30 @@ class BasicController < ApplicationController
               message_button: {
                label: "공지사항 바로가기.",
                 url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
+              }
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
+         #공지사항 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "장학소식"
+            url ="http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = Array.new
+            for i in 1..5 do
+             info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a").text.strip
+              end
+            @msg = {
+              message: {
+                  text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n",
+              message_button: {
+               label: "장학소식 바로가기.",
+                url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361"
               }
               },
               keyboard: {
