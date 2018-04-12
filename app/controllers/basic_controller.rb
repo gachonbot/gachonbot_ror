@@ -13,8 +13,6 @@ class BasicController < ApplicationController
         render json: @msg, status: :ok
     end
     
-    parser = Parser.new
-    
     #요일 변경 함수
     def exchange_day(day)
       case day
@@ -45,7 +43,8 @@ class BasicController < ApplicationController
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
-        
+            parser = Parser.new
+
         if @response == "안녕!"
             @msg = {
               message: {
@@ -79,7 +78,7 @@ class BasicController < ApplicationController
            #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
             @msg = {
               message: {
-                  text: "#{parser.food_parser}"
+                  text: parser.food_parser
               },
               keyboard: {
                 type: "text",
