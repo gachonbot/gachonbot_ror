@@ -79,7 +79,7 @@ class BasicController < ApplicationController
            #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
             @msg = {
               message: {
-                  text: parser.food_parser
+                  text: "#{parser.food_parser}"
               },
               keyboard: {
                 type: "text",
