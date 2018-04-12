@@ -103,7 +103,7 @@ class BasicController < ApplicationController
         elsif @response == "db"
             @msg = {
               message: {
-                  text: "#{Phone.find_by(id: 1).number}"
+                  text: "#{Phone.all.find_by(id: 1).name}"
               },
               keyboard: {
                 type: "text",
