@@ -4,7 +4,7 @@ class Parser
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
-           return info.text.gsub("\r", "\r\n")
+           puts info.text.gsub("\r", "\r\n")
     end
     
 end
