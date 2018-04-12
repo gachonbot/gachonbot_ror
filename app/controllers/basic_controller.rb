@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'rest-client'
 require 'httparty'
+require 'Parser'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -11,6 +12,8 @@ class BasicController < ApplicationController
             }
         render json: @msg, status: :ok
     end
+    
+    parser = Parser.new
     
     #요일 변경 함수
     def exchange_day(day)
@@ -70,13 +73,13 @@ class BasicController < ApplicationController
             
         #예술대학 학식    
         elsif @response == " 예술대학"
-            url ="http://m.gachon.ac.kr/menu/menu.jsp"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
+            #url ="http://m.gachon.ac.kr/menu/menu.jsp"
+            #page = RestClient.get(url)
+           #doc = Nokogiri::HTML(page)
+           #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
             @msg = {
               message: {
-                  text: "#{info.text.gsub("\r", "\r\n")}"
+                  text: parser.food_parser
               },
               keyboard: {
                 type: "text",
