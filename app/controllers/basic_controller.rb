@@ -100,6 +100,17 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
+        elsif @response == "db"
+            @msg = {
+              message: {
+                  text: "#{Phone.find_by(id: 1).number}"
+              },
+              keyboard: {
+                type: "text",
+              }
+            }
+            render json: @msg, status: :ok
+            
         #비전타워 학식
         elsif @response == " 비전타워"
             url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
