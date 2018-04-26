@@ -25,30 +25,12 @@ class BasicController < ApplicationController
             infoHelper = InfoHelper.new
 
         if @response == "안녕!"
-            @msg = {
-              message: {
-                  text: "안녕하세요 가천대학교 봇입니다! 어떤 말이든 다 대답해 드립니다! 대표적인 명령어는 명령어 보여줘! 로 확인 가능합니다! 즐거운 하루 되세요!"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-
+            render json: jsonHelper.messageJson(infoHelper.show_start)
 
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
         elsif @response.include? "학식"
-          @msg = {
-              message: {
-                  text: "오늘의 학식을 알려드릴게요! 건물을 선택해 주세요!"
-              },
-              keyboard: {
-                type: "buttons",
-                buttons: [" 예술대학", " 교육대학원", " 비전타워"]
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.foodJson
             
         #예술대학 학식    
         elsif @response == " 예술대학"
@@ -62,6 +44,31 @@ class BasicController < ApplicationController
         elsif @response == " 비전타워"
            render json: jsonHelper.messageJson(parser.food_vision)
            
+        #지도 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response == "지도"
+            render json: jsonHelper.labelJson("캠퍼스 지도입니다!","캠퍼스지도 보러가기","http://www.gachon.ac.kr/introduce/campus/campus_g.html")
+                    
+        #중앙도서관 자리 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "중앙도서관" && "자리"
+            render json: jsonHelper.messageJson(parser.parse_library)
+            
+        #학사일정 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "학사일정"
+            render json: jsonHelper.messageJson(parser.parse_schedule)
+            
+        #공지사항 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "공지사항"
+            render json: jsonHelper.labelJson(parser.parse_notice,"공지사항 바로가기","http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358")
+            
+         #공지사항 조회 기능
+        #가천대학교 홈페이지 크롤링
+        elsif @response.include? "장학소식"
+            render json: jsonHelper.labelJson(parser.parse_scholar,"장학소식 바로가기","http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361")
+        
         elsif @response == "db"
             @msg = {
               message: {
@@ -73,122 +80,9 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok   
             
-        #지도 조회 기능
-        #가천대학교 홈페이지 크롤링
-        elsif @response == "지도"
-            @msg = {
-              message: {
-                  text: "캠퍼스 지도입니다!",
-              message_button: {
-               label: "캠퍼스지도 보러가기.",
-                url: "http://www.gachon.ac.kr/introduce/campus/campus_g.html"
-              }
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-                    
-        #중앙도서관 자리 조회 기능
-        #가천대학교 홈페이지 크롤링
-        elsif @response.include? "중앙도서관" && "자리"
-            url ="http://dlibadm.gachon.ac.kr/GACHON_CENTRAL_BOOKING/webbooking/statusList.jsp"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           @seatname = Array.new
-           @seatinfo = Array.new
-           for i in 1..5
-           @seatname << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.left").text
-           @seatinfo << doc.css("#mainContents > div > div > div > table > tbody > tr:nth-child(#{i}) > td.last.right.bold.blue.bg_blue").text
-            end
-            @msg = {
-              message: {
-                  text: "\n 열람실\t\t\t\t\t\t\t잔여좌석\n\n#{@seatname[0]}\t\t\t\t\t#{@seatinfo[0]}\n#{@seatname[1]}\t\t\t\t\t#{@seatinfo[1]}\n#{@seatname[2]}\t\t\t\t\t#{@seatinfo[2]}\n#{@seatname[3]}\t\t\t\t\t#{@seatinfo[3]}\n#{@seatname[4]}\t\t\t\t\t#{@seatinfo[4]}\n"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
-        #학사일정 조회 기능
-        #가천대학교 홈페이지 크롤링
-        elsif @response.include? "학사일정"
-            url ="http://m.gachon.ac.kr/day/day.jsp?boardType_seq=395"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           @month = Date.today.strftime("%m")
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@month}]/div")
-            @msg = {
-              message: {
-                  text: "#{@month}월의 학사일정입니다!\n#{info.text.gsub("\r", "\n")}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
-        #공지사항 조회 기능
-        #가천대학교 홈페이지 크롤링
-        elsif @response.include? "공지사항"
-            url ="http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = Array.new
-            for i in 1..5 do
-             info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a/text()").text.strip
-            end
-            @msg = {
-              message: {
-                  text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n",
-              message_button: {
-               label: "공지사항 바로가기.",
-                url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=358"
-              }
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
-         #공지사항 조회 기능
-        #가천대학교 홈페이지 크롤링
-        elsif @response.include? "장학소식"
-            url ="http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = Array.new
-            for i in 1..5 do
-             info << doc.xpath("//*[@id=\"contnet\"]/div[2]/ul/li[#{i}]/a").text.strip
-              end
-            @msg = {
-              message: {
-                  text: "#{info[0]}\n\n#{info[1]}\n\n#{info[2]}\n\n#{info[3]}\n\n#{info[4]}\n\n",
-              message_button: {
-               label: "장학소식 바로가기.",
-                url: "http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361"
-              }
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
         #현재시간을 나타내주는 기능  
         elsif @response.include? "시간"
-            @msg = {
-              message: {
-                  text: "#{Time.now}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson("#{Time.now}")
             
         #지하철 경로조회 기능
         #서울시 실시간 지하철 API
