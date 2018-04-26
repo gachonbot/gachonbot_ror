@@ -1,11 +1,9 @@
 require 'nokogiri'
 require 'rest-client'
 
-
-
 class Parser
     
-    #요일 변경 함수
+    #요일 변경 함수.
     def exchange_day(day)
       case day
       when "Monday"   
