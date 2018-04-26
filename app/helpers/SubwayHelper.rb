@@ -16,7 +16,7 @@ class SubwayHelper
              end
             
                 
-        return result
+        return result.to_s
    end
     
 end
