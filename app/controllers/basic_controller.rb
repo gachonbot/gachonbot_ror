@@ -4,6 +4,7 @@ require 'httparty'
 require 'Parser'
 require 'JsonHelper'
 require 'InfoHelper'
+require 'WeatherHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -23,7 +24,9 @@ class BasicController < ApplicationController
             parser = Parser.new
             jsonHelper = JsonHelper.new
             infoHelper = InfoHelper.new
-
+            weatherHelper = WeatherHelper.new
+            
+            
         if @response == "안녕!"
             render json: jsonHelper.messageJson(infoHelper.show_start)
 
@@ -81,7 +84,7 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok   
             
         #현재시간을 나타내주는 기능  
-        elsif @response.include? ("현재" && "시간") or ("지금" && "몇시")
+        elsif @response.include? "시간"
             render json: jsonHelper.messageJson("#{Time.now}")
             
         #지하철 경로조회 기능
@@ -126,49 +129,15 @@ class BasicController < ApplicationController
         #날씨, 미세먼지 정보 조회 기능
         #sktelecom 날씨 API, data.go.kr대기오염API 이용
         elsif @response.include? "날씨"
-              resp = HTTParty.get("https://api2.sktelecom.com/weather/current/hourly?version=1&lat=37.450745&lon=127.128804&appkey=af357d39-420c-49b0-ac22-d29381aa2a9b")
-              resp.parsed_response["weather"]["hourly"].each do |x|
-                @name = x["sky"]["name"]
-                @tc =  x["temperature"]["tc"].to_i.round
-                @tmin =  x["temperature"]["tmin"].to_i.round
-                @tmax =  x["temperature"]["tmax"].to_i.round
-              end 
-              airresp = HTTParty.get("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?serviceKey=Yg%2Fv2SNnJRBBLW7RzCyiLenB1dTtvBca4kgw6L9wyVzY1M224M0RlRnxwasd9FMOMrWMqgD%2Ft0b%2BMDFdg5jWig%3D%3D&numOfRows=1&pageSize=1&pageNo=1&startPage=1&stationName=#{URI.escape("수내동")}&dataTerm=DAILY&ver=1.3")
-              air = airresp.parsed_response['response']['body']['items']['item']['pm10Value'].to_i
-              if(air>150)
-                airValue = "매우나쁨"
-                elsif(air>80)
-                airValue = "나쁨"
-                elsif(air>30)
-                airValue = "보통"
-              else
-                airValue = "좋음"
-              end
-              @msg = {
-              message: {
-                  text: "현재 가천대의 날씨입니다!\n기상 : #{@name}\n현재온도 : #{@tc}도\n최저기온 : #{@tmin}도\n최고기온 : #{@tmax}도\n미세먼지 농도 : #{air}\t#{airValue}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+              render json: jsonHelper.messageJson(weatherHelper.show_weather)
             
         #미세먼지 조회 기능
         #data.go.kr의 대기오염API 이용
         elsif @response.include? "미세먼지"
-              resp = HTTParty.get("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?serviceKey=Yg%2Fv2SNnJRBBLW7RzCyiLenB1dTtvBca4kgw6L9wyVzY1M224M0RlRnxwasd9FMOMrWMqgD%2Ft0b%2BMDFdg5jWig%3D%3D&numOfRows=1&pageSize=1&pageNo=1&startPage=1&stationName=#{URI.escape("수내동")}&dataTerm=DAILY&ver=1.3")
-              air = resp.parsed_response['response']['body']['items']['item']['pm10Value'].to_i
-              @msg = {
-              message: {
-                  text: "현재 가천대의 미세먼지농도 입니다!\n농도 : #{air}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            elsif @response == "170516"
+              render json: jsonHelper.messageJson(weatherHelper.show_air)
+              
+              
+        elsif @response == "170516"
             @msg = {
               message: {
                   text: "현지야사랑해"
