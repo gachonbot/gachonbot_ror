@@ -44,6 +44,7 @@ class BasicController < ApplicationController
         @response = params[:content]
         @user_key = params[:user_key]
             parser = Parser.new
+            json_helper = Json_helper.new
 
         if @response == "안녕!"
             @msg = {
@@ -55,6 +56,9 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
+            
+            elsif @response == "제이슨"
+            render json: json_helper.messageJson("성공"), status: :ok
             
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
