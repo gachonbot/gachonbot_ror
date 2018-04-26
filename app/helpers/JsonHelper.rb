@@ -1,4 +1,4 @@
-class Json_helper
+class JsonHelper
     
     
     def messageJson(text)
