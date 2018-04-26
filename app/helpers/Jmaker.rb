@@ -1,4 +1,4 @@
-class Json_helper
+class Jmaker
     
     
     def messageJson(text)
