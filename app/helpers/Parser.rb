@@ -2,8 +2,9 @@ require 'nokogiri'
 require 'rest-client'
 
 class Parser
-    before_action :set_day
-    
+    def initialize
+    exchange_day(Date.today.strftime("%A"))
+    end
     #요일 변경 함수.
     def exchange_day(day)
       case day
@@ -38,9 +39,5 @@ class Parser
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
            return info.text.gsub("\r", "\r\n")
     end
-    
-    
-    def set_day
-      exchange_day(Date.today.strftime("%A"))
-    end
+  
 end
