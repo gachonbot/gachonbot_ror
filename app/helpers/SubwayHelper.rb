@@ -16,7 +16,7 @@ class SubwayHelper
              end
             
                 
-        return @result
+        return @result.gsub("\r", "\r\n")
    end
     
 end
