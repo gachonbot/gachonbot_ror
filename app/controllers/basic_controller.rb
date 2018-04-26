@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'rest-client'
 require 'httparty'
 require 'Parser'
-require 'Jmaker'
+require 'Json_helper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -45,7 +45,7 @@ class BasicController < ApplicationController
         @response = params[:content]
         @user_key = params[:user_key]
             parser = Parser.new
-            jmaker = Jmaker.new
+            json_helper = Json_helper.new
 
         if @response == "안녕!"
             @msg = {
@@ -60,7 +60,7 @@ class BasicController < ApplicationController
             
             
             elsif @response == "제이슨"
-            render json: jmaker.messageJson("성공")
+            render json: json_helper.messageJson("성공")
             
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
