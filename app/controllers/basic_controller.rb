@@ -54,36 +54,16 @@ class BasicController < ApplicationController
             
         #예술대학 학식    
         elsif @response == " 예술대학"
-            #url ="http://m.gachon.ac.kr/menu/menu.jsp"
-            #page = RestClient.get(url)
-           #doc = Nokogiri::HTML(page)
-           #info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
-            @msg = {
-              message: {
-                  text: parser.food_parser
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(parser.food_art)
             
         #교육대학원 학식
         elsif @response == " 교육대학원"
-            url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
-            @msg = {
-              message: {
-                  text: "#{info.text.gsub("\r", "\r\n")}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(parser.food_edu)
             
+        #비전타워 학식
+        elsif @response == " 비전타워"
+           render json: jsonHelper.messageJson(parser.food_vision)
+           
         elsif @response == "db"
             @msg = {
               message: {
@@ -93,23 +73,7 @@ class BasicController < ApplicationController
                 type: "text",
               }
             }
-            render json: @msg, status: :ok
-            
-        #비전타워 학식
-        elsif @response == " 비전타워"
-            url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
-            page = RestClient.get(url)
-           doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
-            @msg = {
-              message: {
-                  text: "#{info.text.gsub("\r", "\r\n")}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: @msg, status: :ok   
             
         #명령어 보여줘!
         elsif @response == "명령어 보여줘!"

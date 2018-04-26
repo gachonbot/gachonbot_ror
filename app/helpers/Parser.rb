@@ -5,6 +5,7 @@ class Parser
     def initialize
     exchange_day(Date.today.strftime("%A"))
     end
+    
     #요일 변경 함수.
     def exchange_day(day)
       case day
@@ -32,11 +33,27 @@ class Parser
       end
     end
     
-    def food_parser
+    def food_art
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
+           return info.text.gsub("\r", "\r\n")
+    end
+    
+    def food_edu
+         url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
+           return info.text.gsub("\r", "\r\n")
+    end
+    
+    def food_vision
+         url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
+            page = RestClient.get(url)
+           doc = Nokogiri::HTML(page)
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
            return info.text.gsub("\r", "\r\n")
     end
   
