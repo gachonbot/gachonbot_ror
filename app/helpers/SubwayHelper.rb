@@ -9,7 +9,7 @@ class SubwayHelper
                   @routeMSG << x["arvlMsg2"]
                 end
                 
-        return "#{@route[0]}\n#{@routeMSG[0]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n\n#{@route[2]}\n#{@routeMSG[2]}\n\n#{@route[3]}\n#{@routeMSG[3]}\n"
+        return "#{@route[0]}\n#{@routeMSG[0]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n\n#{@route[2]}\n#{@routeMSG[2]}\n"
    end
     
 end
