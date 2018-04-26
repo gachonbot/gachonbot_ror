@@ -18,8 +18,10 @@ class BasicController < ApplicationController
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
+        
             parser = Parser.new
             jsonHelper = JsonHelper.new
+
 
         if @response == "안녕!"
             @msg = {

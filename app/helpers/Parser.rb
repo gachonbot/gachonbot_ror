@@ -2,10 +2,10 @@ require 'nokogiri'
 require 'rest-client'
 
 class Parser
+    before_action :set_day
     
     #요일 변경 함수.
     def exchange_day(day)
-      day = Date.today.strftime("%A")
       case day
       when "Monday"   
         @@day_value = 1
@@ -39,4 +39,8 @@ class Parser
            return info.text.gsub("\r", "\r\n")
     end
     
+    
+    def set_day
+      exchange_day(Date.today.strftime("%A"))
+    end
 end
