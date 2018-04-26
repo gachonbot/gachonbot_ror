@@ -30,7 +30,7 @@ class Parser
       end
     end
     
-     exchange_day(Date.today.strftime("%A"))
+     #exchange_day(Date.today.strftime("%A"))
     
     def food_parser
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
