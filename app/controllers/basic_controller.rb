@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'rest-client'
 require 'httparty'
 require 'Parser'
+require 'Json_helper'
 
 class BasicController < ApplicationController
     def keyboard_init
