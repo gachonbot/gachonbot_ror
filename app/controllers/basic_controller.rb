@@ -3,6 +3,7 @@ require 'rest-client'
 require 'httparty'
 require 'Parser'
 require 'JsonHelper'
+require 'InfoHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -21,7 +22,7 @@ class BasicController < ApplicationController
         
             parser = Parser.new
             jsonHelper = JsonHelper.new
-
+            infoHelper = InfoHelper.new
 
         if @response == "안녕!"
             @msg = {
@@ -33,11 +34,8 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-            
-            
-            elsif @response == "제이슨"
-            render json: jsonHelper.messageJson("성공")
-            
+
+
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
         elsif @response.include? "학식"
@@ -74,19 +72,6 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok   
-            
-        #명령어 보여줘!
-        elsif @response == "명령어 보여줘!"
-          @msg = {
-              message: {
-                  text: "대표적인 기능입니다!\n""학식"" = 오늘의 학식조회\n""!가천대역"" = 실시간 가천대역 열차도착 정보\n""!지하철 ""역명"""" = 가천대역에서 특정 역까지 가는 최단 경로 조회\n""날씨"" = 가천대의 현재 날씨,미세먼지 정보 조회\n ""중앙도서관 자리"" = 실시간 중앙도서관 남은좌석 조회"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            
             
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링
@@ -299,87 +284,37 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok
-        
+            
+            
+        #명령어 보여줘!
+        elsif @response == "명령어 보여줘!"
+            render json: jsonHelper.messageJson(infoHelper.show_command)
+            
         #흡연구역 알려주는 기능  
         elsif @response.include? "흡연구역"
-            @msg = {
-              message: {
-                  text: "교내 흡연구역은 공과대학2 정자 앞, 바이오나노연구원 4층 뒷문, 공과대학2 매점 앞, 가천관 가는 계단 앞, 바이오나노대학 건물 뒤편, 교육대학원 2층 옆, 중앙도서관 매점 앞, 주차장 공중전화 부스 앞, 학생회관 오른쪽 주차장 위, 일반대학원 정문 오른쪽, 예술대학1 분수대 옆, 예술대학2 1층 출입문 옆, 학군단 건물 구석, 글로벌센터 농구장 앞, IT대학 벤치 뒤 입니다!"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(infoHelper.show_smoke)
         
         #샤워실 알려주는 기능
         elsif @response.include? "샤워실"
-            @msg = {
-              message: {
-                  text: "샤워실은 산학협력관 5층, 가천관 B1층, IT대학 4층, 공과대학 1층, 학생회관 2층,4층(여자), 바이오나노대학 2,4층(여자), 3층, 종합운동장에 있습니다!"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
-            elsif @response.include? "ATM"
-            @msg = {
-              message: {
-                  text: "\n신한은행 : 법과대학 1층, 비전타워 1층, 가천관 2층, 중앙도서관 1층\n국민은행 : 제2공학관 4층, 가천관 B1층\n우체국 은행 : 법과대학 1층"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(infoHelper.show_shower)
+        
+        elsif @response.include? "ATM"
+            render json: jsonHelper.messageJson(infoHelper.show_atm)
             
         #교내 편의점 알림    
         elsif @response.include? "편의점"
-            @msg = {
-              message: {
-                  text: "가천관 2층(세븐일레븐), 공과대학2 4층, 프리덤광장(세븐일레븐), 비전타워A동(세븐일레븐), 비전타워B동(세븐일레븐), 예술대학1 1층, 중앙도서관 지하1층에 있습니다! ٩(ᐛ)و "
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(infoHelper.show_conv)
             
         #교내 카페 알림 기능
         elsif @response.include? "카페"&&"교내"
-            @msg = {
-              message: {
-                  text: "IT대학앞 세븐일레븐옆에 파스쿠치, 가천관2층에 Grazie, 프리덤광장에 투썸플레이스, 카페로가 있습니다!\n٩(ᐛ)و "
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(infoHelper.show_cafe)
             
         #개발자정보
         elsif @response == "개발자"
-            @msg = {
-              message: {
-                  text: "가천대학교 컴퓨터공학과 14\n한승우\n010-9939-4434\ntuguri8@gmail.com"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson(infoHelper.show_developer)
             
-            elsif @response == "이길여"
-            @msg = {
-              message: {
-                  text: "총장님사랑해요"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+        elsif @response == "이길여"
+            render json: jsonHelper.messageJson(infoHelper.show_boss)
             
         #심심이 API
         else
