@@ -5,6 +5,7 @@ class Parser
     
     #요일 변경 함수.
     def exchange_day(day)
+      day = Date.today.strftime("%A")
       case day
       when "Monday"   
         @@day_value = 1
@@ -29,8 +30,6 @@ class Parser
         day = "일요일"        
       end
     end
-    
-     #exchange_day(Date.today.strftime("%A"))
     
     def food_parser
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
