@@ -3,7 +3,7 @@ require 'rest-client'
 require 'httparty'
 require 'Parser'
 require 'JsonHelper'
-
+require 'DateHelper'
 class BasicController < ApplicationController
     def keyboard_init
        @msg =
@@ -46,7 +46,8 @@ class BasicController < ApplicationController
         @user_key = params[:user_key]
             parser = Parser.new
             jsonHelper = JsonHelper.new
-
+            dateHelper = DateHelper.new
+            
         if @response == "안녕!"
             @msg = {
               message: {
