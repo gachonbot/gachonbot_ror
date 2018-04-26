@@ -58,8 +58,9 @@ class BasicController < ApplicationController
             }
             render json: @msg, status: :ok
             
-            elsif @response == "제이슨"
-            render json: json_helper.messageJson("성공")
+            
+            #elsif @response == "제이슨"
+            #ender json: json_helper.messageJson("성공")
             
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
