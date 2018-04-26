@@ -5,6 +5,7 @@ require 'Parser'
 require 'JsonHelper'
 require 'InfoHelper'
 require 'WeatherHelper'
+require 'SubwayHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -25,7 +26,7 @@ class BasicController < ApplicationController
             jsonHelper = JsonHelper.new
             infoHelper = InfoHelper.new
             weatherHelper = WeatherHelper.new
-            
+            subwayHelper = SubwayHelper.new
             
         if @response == "안녕!"
             render json: jsonHelper.messageJson(infoHelper.show_start)
@@ -96,35 +97,12 @@ class BasicController < ApplicationController
                           @route = x["shtStatnNm"]
                           @routeMSG = x["shtTransferMsg"]
                         end
-            @msg = {
-              message: {
-                  text: "#{@destination}까지는 #{@routeMSG}\n\n경로 : #{@route.delete(" ").gsub(",", "->")}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+            render json: jsonHelper.messageJson("#{@destination}까지는 #{@routeMSG}\n\n경로 : #{@route.delete(" ").gsub(",", "->")}")
             
         #가천대역 도착정보 조회 기능
         #서울시 실시간 지하철도착정보API
-        elsif @response.include? "!가천대역"
-            resp = HTTParty.get("http://swopenapi.seoul.go.kr/api/subway/56475774517475673131345a4c714e70/json/realtimeStationArrival/1/5/#{CGI.escape("가천대")}")
-              @route = Array.new
-              @routeMSG = Array.new
-                resp.parsed_response["realtimeArrivalList"].each do |x|
-                  @route << x["trainLineNm"]
-                  @routeMSG << x["arvlMsg2"]
-                end
-            @msg = {
-              message: {
-                  text: "#{@route[0]}\n#{@routeMSG[0]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+        elsif @response.include? "가천대역"
+              render json: jsonHelper.messageJson(subwayHelper.show_gachon)
             
         #날씨, 미세먼지 정보 조회 기능
         #sktelecom 날씨 API, data.go.kr대기오염API 이용
@@ -182,15 +160,7 @@ class BasicController < ApplicationController
         #심심이 API
         else
           resp = HTTParty.get("http://api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
-            @msg = {
-              message: {
-                  text: resp.parsed_response["response"]
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok
+          render json: jsonHelper.messageJson(resp.parsed_response["response"])
         end
     end
 end
