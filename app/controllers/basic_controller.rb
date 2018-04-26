@@ -3,7 +3,7 @@ require 'rest-client'
 require 'httparty'
 require 'Parser'
 require 'JsonHelper'
-require 'DateHelper'
+
 class BasicController < ApplicationController
     def keyboard_init
        @msg =
@@ -14,44 +14,17 @@ class BasicController < ApplicationController
         render json: @msg, status: :ok
     end
     
-    #요일 변경 함수
-    def exchange_day(day)
-      case day
-      when "Monday"   
-        @@day_value = 1
-        day = "월요일"
-      when "Tuesday"    
-        @@day_value = 2
-        day = "화요일"
-      when "Wednesday"
-        @@day_value = 3
-        day = "수요일"
-      when "Thursday"
-        @@day_value = 4
-        day= "목요일"
-      when "Friday"
-        @@day_value = 5
-        day = "금요일"
-      when "Saturday"
-        @@day_value = 6
-        day = "토요일"
-      when "Sunday"
-        @@day_value = 7
-        day = "일요일"        
-      end
-    end
 
     def chat_control
         @response = params[:content]
         @user_key = params[:user_key]
             parser = Parser.new
             jsonHelper = JsonHelper.new
-            dateHelper = DateHelper.new
-            
+
         if @response == "안녕!"
             @msg = {
               message: {
-                  text: "안녕하세요 가천대학교 봇입니다! 어떤 말이든 다 대답해 드립니다! 대표적인 명령어는 명령어 보여줘! 로 확인 가능합니다! 즐거운 #{exchange_day(Date.today.strftime("%A"))} 되세요!"
+                  text: "안녕하세요 가천대학교 봇입니다! 어떤 말이든 다 대답해 드립니다! 대표적인 명령어는 명령어 보여줘! 로 확인 가능합니다! 즐거운 하루 되세요!"
               },
               keyboard: {
                 type: "text",
