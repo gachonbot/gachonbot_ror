@@ -81,7 +81,7 @@ class BasicController < ApplicationController
             render json: @msg, status: :ok   
             
         #현재시간을 나타내주는 기능  
-        elsif @response.include? ("현재" and "시간") or ("지금" and "몇시")
+        elsif @response.include? ("현재" && "시간") or ("지금" && "몇시")
             render json: jsonHelper.messageJson("#{Time.now}")
             
         #지하철 경로조회 기능
