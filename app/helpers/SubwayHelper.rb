@@ -12,11 +12,11 @@ class SubwayHelper
                 
               @result = Array.new
              for i in 0...@count.to_i
-                 @result << "#{@route[i]}\n#{@routeMSG[i]}"
+                 @result << "#{@route[i]}\n#{@routeMSG[i]}".text
                  
              end
                 
-        return @result.text
+        return @result
    end
     
 end
