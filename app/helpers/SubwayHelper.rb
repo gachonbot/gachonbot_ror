@@ -16,11 +16,11 @@ class SubwayHelper
                  
                  #{@routeMSG[i]}
                  
-                 ".delete("\n","[","]","     ")
+                 "
              end
             
                 
-        return @result
+        return @result.delete("\n")
    end
     
 end
