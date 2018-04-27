@@ -15,7 +15,7 @@ class SubwayHelper
                  @result << "#{@route[i]}\n#{@routeMSG[i]}"
                  
              end
-            
+            @result = puts @result
                 
         return @result
    end
