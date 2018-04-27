@@ -12,13 +12,14 @@ class SubwayHelper
                 
               @result = Array.new
              for i in 0...@count.to_i
-                 @result << @route[i].delete("[")
-                 @routeMSG[i].delete("]")
+                 @result[i] = "#{@route[i]}\n#{@routeMSG[i]}"
                  
              end
+             
+             @result2 = result
             
                 
-        return @result
+        return @result2
    end
     
 end
