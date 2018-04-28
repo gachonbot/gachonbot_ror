@@ -170,12 +170,6 @@ class BasicController < ApplicationController
         
         end
     rescue Timeout::Error
-      render json: {
-      "message":{
-        "text": "가천대학교 서버가 불안정하여\n정보를 가져오지 못하고 있습니다(흑흑)"
-      }
-    }
-    return;
-    end
+      render json: jsonHelper.messageJson("에러")
     end
 end
