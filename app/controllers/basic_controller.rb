@@ -8,7 +8,6 @@ require 'WeatherHelper'
 require 'SubwayHelper'
 require 'StoreHelper'
 require 'PhoneHelper'
-require 'timeout'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -23,8 +22,7 @@ class BasicController < ApplicationController
 
     def chat_control
         
-        begin
-      complete_results = Timeout.timeout(4.5) do
+        
         @response = params[:content]
         @user_key = params[:user_key]
         
@@ -167,9 +165,5 @@ class BasicController < ApplicationController
           resp = HTTParty.get("http://api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
           render json: jsonHelper.messageJson(resp.parsed_response["response"])
         end
-        
-        end
-    rescue Timeout::Error
-      render json: jsonHelper.messageJson("에러")
     end
 end
