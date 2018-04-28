@@ -6,6 +6,7 @@ require 'JsonHelper'
 require 'InfoHelper'
 require 'WeatherHelper'
 require 'SubwayHelper'
+require 'StoreHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -27,6 +28,7 @@ class BasicController < ApplicationController
             infoHelper = InfoHelper.new
             weatherHelper = WeatherHelper.new
             subwayHelper = SubwayHelper.new
+            storeHelper = StoreHelper.new
             
         if @response == "안녕!"
             render json: jsonHelper.messageJson(infoHelper.show_start)
@@ -72,6 +74,15 @@ class BasicController < ApplicationController
         #가천대학교 홈페이지 크롤링
         elsif @response.include? "장학소식"
             render json: jsonHelper.labelJson(parser.parse_scholar,"장학소식 바로가기","http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361")
+            
+        elsif @response.include? "가게정보"
+            render json: jsonHelper.messageJson(storeHelper.store_info(@response))
+            
+        elsif @response.include? "가게전화번호"
+            render json: jsonHelper.messageJson(storeHelper.store_number(@response))
+            
+        elsif @response.include? "가게영업시간"
+            render json: jsonHelper.messageJson(storeHelper.store_time(@response))
         
         elsif @response == "db"
             @msg = {
