@@ -3,16 +3,11 @@ class PhoneHelper
        @Phones = Phone.all
    end
    
-   def store_info(store)
-        return "이름 : #{@Phones.find_by(name: "#{store}").name}\n\n전화번호\n#{@Phones.find_by(name: "#{store}").number}\n\n영업시간\n#{@Phones.find_by(name: "#{store}").time}"
-   end
-    
-   def store_phone(store)
-        return "이름 : #{@Phones.find_by(name: "#{store}").name}\n\n전화번호\n#{@Phones.find_by(name: "#{store}").number}"
-   end
-   
-   def store_time(store)
-        return "이름 : #{@Phones.find_by(name: "#{store}").name}\n\n영업시간\n#{@Phones.find_by(name: "#{store}").time}"
+   def dpet_number(dept)
+        dept = dept.split(" ").first
+        @dept_name = @Phones.find_by(name: "#{dept}").name
+        @dept_number = @Phones.find_by(name: "#{dept}").number
+        return "#{@dept_name}의 과사 전화번호는 \n#{@dept_number} 입니다."
    end
 
 end

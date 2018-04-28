@@ -7,6 +7,7 @@ require 'InfoHelper'
 require 'WeatherHelper'
 require 'SubwayHelper'
 require 'StoreHelper'
+require 'PhoneHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -29,6 +30,7 @@ class BasicController < ApplicationController
             weatherHelper = WeatherHelper.new
             subwayHelper = SubwayHelper.new
             storeHelper = StoreHelper.new
+            phoneHelper = PhoneHelper.new
             
         if @response == "안녕!"
             render json: jsonHelper.messageJson(infoHelper.show_start)
@@ -83,6 +85,9 @@ class BasicController < ApplicationController
             
         elsif @response.include? "가게영업시간"
             render json: jsonHelper.messageJson(storeHelper.store_time(@response))
+            
+        elsif @response.include? "과사번호"
+            render json: jsonHelper.messageJson(phoneHelper.dept_number(@response))
         
         elsif @response == "db"
             @msg = {
@@ -94,10 +99,6 @@ class BasicController < ApplicationController
               }
             }
             render json: @msg, status: :ok   
-            
-        #현재시간을 나타내주는 기능  
-        elsif @response.include? "시간"
-            render json: jsonHelper.messageJson("#{Time.now}")
             
         #지하철 경로조회 기능
         #서울시 실시간 지하철 API
