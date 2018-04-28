@@ -3,7 +3,7 @@ class PhoneHelper
        @Phones = Phone.all
    end
    
-   def dpet_number(dept)
+   def dept_number(dept)
         dept = dept.split(" ").first
         @dept_name = @Phones.find_by(name: "#{dept}").name
         @dept_number = @Phones.find_by(name: "#{dept}").number
