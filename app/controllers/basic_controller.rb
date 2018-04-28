@@ -76,7 +76,11 @@ class BasicController < ApplicationController
             render json: jsonHelper.labelJson(parser.parse_scholar,"장학소식 바로가기","http://m.gachon.ac.kr/gachon/notice.jsp?boardType_seq=361")
             
         elsif @response.include? "가게정보"
-            render json: jsonHelper.messageJson(storeHelper.store_info(@response))
+        store = @response.split(" ").first
+        @store_name = Store.all.find_by(name: "#{store}").name
+        @store_number = Store.all.find_by(name: "#{store}").number
+        @store_time = Store.all.find_by(name: "#{store}").time
+            render json: jsonHelper.messageJson("이름 : #{@store_name}\n\n전화번호\n#{@store_number}\n\n영업시간\n#{@store_time}")
             
         elsif @response.include? "가게전화번호"
             render json: jsonHelper.messageJson(storeHelper.store_number(@response))
