@@ -5,10 +5,10 @@ class StoreHelper
    
    def store_info(store)
         store = store.split(" ").first
-        store_name = @Stores.find_by(name: "#{store}").name
-        store_number = @Stores.find_by(name: "#{store}").number
-        store_time = @Stores.find_by(name: "#{store}").time
-        return "이름 : #{store_name}\n\n전화번호\n#{store_number}\n\n영업시간\n#{store_time}"
+        @store_name = Store.all.find_by(name: "#{store}").name
+        @store_number = Store.all.find_by(name: "#{store}").number
+        @store_time = Store.all.find_by(name: "#{store}").time
+        return "이름 : #{@store_name}\n\n전화번호\n#{@store_number}\n\n영업시간\n#{@store_time}"
    end
     
    def store_phone(store)
