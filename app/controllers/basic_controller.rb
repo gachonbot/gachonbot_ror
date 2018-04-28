@@ -80,7 +80,7 @@ class BasicController < ApplicationController
         @store_name = Store.all.find_by(name: "#{store}").name
         @store_number = Store.all.find_by(name: "#{store}").number
         @store_time = Store.all.find_by(name: "#{store}").time
-            render json: jsonHelper.messageJson("이름 : #{@store_name}\n\n전화번호\n#{@store_number}\n\n영업시간\n#{@store_time}")
+            render json: jsonHelper.messageJson("#{@store_name}")
             
         elsif @response.include? "가게전화번호"
             render json: jsonHelper.messageJson(storeHelper.store_number(@response))
