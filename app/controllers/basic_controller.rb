@@ -8,6 +8,7 @@ require 'WeatherHelper'
 require 'SubwayHelper'
 require 'StoreHelper'
 require 'PhoneHelper'
+require 'timeout'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -21,6 +22,9 @@ class BasicController < ApplicationController
     
 
     def chat_control
+        
+        begin
+      complete_results = Timeout.timeout(4.5) do
         @response = params[:content]
         @user_key = params[:user_key]
         
@@ -88,17 +92,6 @@ class BasicController < ApplicationController
             
         elsif @response.include? "과사번호"
             render json: jsonHelper.messageJson(phoneHelper.dept_number(@response))
-        
-        elsif @response == "db"
-            @msg = {
-              message: {
-                  text: "#{Phone.all.find_by(id: 1).name}"
-              },
-              keyboard: {
-                type: "text",
-              }
-            }
-            render json: @msg, status: :ok   
             
         #지하철 경로조회 기능
         #서울시 실시간 지하철 API
@@ -174,5 +167,15 @@ class BasicController < ApplicationController
           resp = HTTParty.get("http://api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
           render json: jsonHelper.messageJson(resp.parsed_response["response"])
         end
+        
+        end
+    rescue Timeout::Error
+      render json: {
+      "message":{
+        "text": "가천대학교 서버가 불안정하여\n정보를 가져오지 못하고 있습니다(흑흑)"
+      }
+    }
+    return;
+    end
     end
 end
