@@ -5,18 +5,11 @@ class SubwayHelper
               @route = Array.new
               @routeMSG = Array.new
                 resp.parsed_response["realtimeArrivalList"].each do |x|
-                  @count = x["totalCount"]
                   @route << x["trainLineNm"]
                   @routeMSG << x["arvlMsg2"]
                 end
-                
-              @result = Array.new
-             for i in 0...@count.to_i
-                 @result << "#{@route[i]}\n#{@routeMSG[i]}".text
-                 
-             end
-                
-        return @result
+
+        return "#{@route[0]}\n#{@routeMSG[0]}\n\n#{@route[1]}\n#{@routeMSG[1]}\n\n#{@route[2]}\n#{@routeMSG[2]}\n\n#{@route[3]}\n#{@routeMSG[3]}\n\n#{@route[4]}\n#{@routeMSG[4]}\n"
    end
     
 end
