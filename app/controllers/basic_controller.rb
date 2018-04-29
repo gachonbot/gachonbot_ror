@@ -8,6 +8,7 @@ require 'WeatherHelper'
 require 'SubwayHelper'
 require 'StoreHelper'
 require 'PhoneHelper'
+require 'MoodangHelper'
 
 class BasicController < ApplicationController
     def keyboard_init
@@ -33,6 +34,7 @@ class BasicController < ApplicationController
             subwayHelper = SubwayHelper.new
             storeHelper = StoreHelper.new
             phoneHelper = PhoneHelper.new
+            moodangHelper = MoodangHelper.new
             
         if @response == "안녕!"
             render json: jsonHelper.messageJson(infoHelper.show_start)
@@ -87,12 +89,25 @@ class BasicController < ApplicationController
             
         elsif @response.include? "가게영업시간"
             render json: jsonHelper.messageJson(storeHelper.store_time(@response))
+
+        elsif @response.include? "가게리스트"
+            render json: jsonHelper.messageJson(storeHelper.store_list)            
             
         elsif @response.include? "과사번호"
             render json: jsonHelper.messageJson(phoneHelper.dept_number(@response))
             
-            elsif @response.include? "가게리스트"
-            render json: jsonHelper.messageJson(storeHelper.store_list)
+        elsif @response.include? "과리스트"
+            render json: jsonHelper.messageJson(phoneHelper.dept_list)
+            
+        
+        elsif @response.include? "무당이"
+            if @response.include? "언제와" || "시간"
+            render json: jsonHelper.moodangJson
+            end
+            
+            
+        elsif @response == "정문 -> 기숙사" || "기숙사 -> 정문"
+            render json: jsonHelper.messageJson(moodangHelper.moodang_arrival)
             
         #지하철 경로조회 기능
         #서울시 실시간 지하철 API

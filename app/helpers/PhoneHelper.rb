@@ -13,5 +13,13 @@ class PhoneHelper
         return "#{@dept_name}의 과사 전화번호는 \n#{@dept_number} 입니다."
         end
    end
+   
+   def dept_list
+     phones = ""
+     @Phones.each do |phone|
+      phones += "#{phone.name}\n"
+     end
+     return phones
+   end
 
 end

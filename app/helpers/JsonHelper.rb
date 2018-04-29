@@ -44,5 +44,19 @@ class JsonHelper
             
         return @msg
     end
+    
+    def moodangJson
+        @msg = {
+              message: {
+                  text: "다음 무당이 시간을 알려드릴게요! 목적지를 선택해주세요!"
+              },
+              keyboard: {
+                type: "buttons",
+                buttons: ["정문 -> 기숙사", "기숙사 -> 정문"]
+              }
+            }
+            
+        return @msg
+    end
 
 end
