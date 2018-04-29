@@ -34,27 +34,39 @@ class Parser
     end
     
     def food_art
+        if @@day_value == 6 or 7
+            return "주말은 운영하지 않습니다!"
+        else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
-           return info.text.gsub("\r", "\r\n")
+            return info.text.gsub("\r", "\r\n")
+       end
     end
     
     def food_edu
+        if @@day_value == 6 or 7
+            return "주말은 운영하지 않습니다!"
+        else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
            return info.text.gsub("\r", "\r\n")
+       end
     end
     
     def food_vision
+        if @@day_value == 6 or 7
+            return "주말은 운영하지 않습니다!"
+        else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
            return info.text.gsub("\r", "\r\n")
+       end
     end
     
     def parse_library

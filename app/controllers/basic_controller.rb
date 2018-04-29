@@ -91,6 +91,9 @@ class BasicController < ApplicationController
         elsif @response.include? "과사번호"
             render json: jsonHelper.messageJson(phoneHelper.dept_number(@response))
             
+            elsif @response.include? "가게리스트"
+            render json: jsonHelper.messageJson(storeHelper.store_list)
+            
         #지하철 경로조회 기능
         #서울시 실시간 지하철 API
         elsif @response.include? "!지하철 "

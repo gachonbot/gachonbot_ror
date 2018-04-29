@@ -38,5 +38,9 @@ class StoreHelper
         return "이름 : #{@store_name}\n\n영업시간\n#{@store_time}"
        end
    end
+   
+   def store_list
+     return "#{@Stores.select(:name)}"
+   end
 
 end
