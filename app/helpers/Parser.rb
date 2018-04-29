@@ -70,7 +70,11 @@ class Parser
     end
     
     def food_artTomorrow
-        if @@day_value == 5 or @@day_value == 6
+        day = @@day_value+1
+        if day == 8
+            day = 1
+        end
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
@@ -82,7 +86,11 @@ class Parser
     end
     
     def food_eduTomorrow
-        if @@day_value == 5 or @@day_value == 6
+        day = @@day_value+1
+        if day == 8
+            day = 1
+        end
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
@@ -94,7 +102,11 @@ class Parser
     end
     
     def food_visionTomorrow
-        if @@day_value == 5 or @@day_value == 6
+        day = @@day_value+1
+        if day == 8
+            day = 1
+        end
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
