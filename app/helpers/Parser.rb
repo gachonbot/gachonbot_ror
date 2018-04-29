@@ -88,7 +88,7 @@ class Parser
         day = 7        
         end
       
-        if @@day_value == 6 or @@day_value == 7
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
@@ -117,7 +117,7 @@ class Parser
       when "일요일"
         day = 7        
         end
-        if @@day_value == 6 or @@day_value == 7
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
@@ -146,7 +146,7 @@ class Parser
       when "일요일"
         day = 7        
         end
-        if @@day_value == 6 or @@day_value == 7
+        if day == 6 or day == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
