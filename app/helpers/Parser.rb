@@ -34,7 +34,7 @@ class Parser
     end
     
     def food_art
-        if @@day_value == 6 or @@day_value == 7
+        if @@day_value == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
@@ -42,7 +42,7 @@ class Parser
            doc = Nokogiri::HTML(page)
            info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl/dd[1]")
             return info.text.gsub("\r", "\r\n")
-       end
+        end
     end
     
     def food_edu
