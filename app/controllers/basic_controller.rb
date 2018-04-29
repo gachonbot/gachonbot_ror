@@ -104,7 +104,7 @@ class BasicController < ApplicationController
             render json: jsonHelper.moodangJson
             
             
-        elsif @response == "정문 -> 기숙사" || "기숙사 -> 정문"
+        elsif @response == "정문 -> 기숙사" or @response == "기숙사 -> 정문"
             render json: jsonHelper.messageJson(moodangHelper.moodang_arrival)
             
         #지하철 경로조회 기능
