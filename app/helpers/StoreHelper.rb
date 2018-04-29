@@ -40,9 +40,9 @@ class StoreHelper
    end
    
    def store_list
-     stores = Array.new
+     stores = ""
      @Stores.each do |store|
-      stores << store.name
+      stores += "#{store.name}\n"
      end
      return stores
    end
