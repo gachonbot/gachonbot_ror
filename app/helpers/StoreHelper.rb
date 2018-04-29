@@ -40,7 +40,11 @@ class StoreHelper
    end
    
    def store_list
-     return "#{@Stores.select(:name)}"
+     stores = Array.new
+     @Stores.each do |store|
+      stores << store.name
+     end
+     return stores
    end
 
 end
