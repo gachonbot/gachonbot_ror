@@ -100,7 +100,7 @@ class BasicController < ApplicationController
             render json: jsonHelper.messageJson(phoneHelper.dept_list)
             
         
-        elsif @response.include? "무당이" and @response.include? "언제와"
+        elsif @response.include? "무당이" and (@response.include? "언제와" or @response.include? "시간")
             render json: jsonHelper.moodangJson
             
             
