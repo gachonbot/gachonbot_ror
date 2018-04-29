@@ -61,15 +61,15 @@ class BasicController < ApplicationController
             
         #예술대학 학식    
         elsif @response == "  예술대학"
-            render json: jsonHelper.messageJson(parser.food_art(@response))
+            render json: jsonHelper.messageJson(parser.food_artd(@response))
             
         #교육대학원 학식
         elsif @response == "  교육대학원"
-            render json: jsonHelper.messageJson(parser.food_edu(@response))
+            render json: jsonHelper.messageJson(parser.food_edud(@response))
             
         #비전타워 학식
         elsif @response == "  비전타워"
-           render json: jsonHelper.messageJson(parser.food_vision(@response))
+           render json: jsonHelper.messageJson(parser.food_visiond(@response))
            
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링

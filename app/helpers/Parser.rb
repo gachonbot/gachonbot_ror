@@ -69,7 +69,7 @@ class Parser
         end
     end
     
-    def food_art(day)
+    def food_artd(day)
         day = day.split(" ").first
         case day
       when "월요일"   
@@ -99,7 +99,7 @@ class Parser
         end
     end
     
-    def food_edu(day)
+    def food_edud(day)
         day = day.split(" ").first
         case day
       when "월요일"   
@@ -128,7 +128,7 @@ class Parser
        end
     end
     
-    def food_vision(day)
+    def food_visiond(day)
         day = day.split(" ").first
         case day
       when "월요일"   
