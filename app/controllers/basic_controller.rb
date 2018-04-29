@@ -56,20 +56,20 @@ class BasicController < ApplicationController
         elsif @response == " 비전타워"
            render json: jsonHelper.messageJson(parser.food_vision)
            
-       elsif @response.include? "학식"&&"요일"
-            render json: jsonHelper.dayfoodJson
+       elsif @response.include? "학식"&&"내일"
+            render json: jsonHelper.tomorrowfoodJson
             
         #예술대학 학식    
         elsif @response == "  예술대학"
-            render json: jsonHelper.messageJson(parser.food_artd(@response))
+            render json: jsonHelper.messageJson(parser.food_artTomorrow)
             
         #교육대학원 학식
         elsif @response == "  교육대학원"
-            render json: jsonHelper.messageJson(parser.food_edud(@response))
+            render json: jsonHelper.messageJson(parser.food_eduTomorrow)
             
         #비전타워 학식
         elsif @response == "  비전타워"
-           render json: jsonHelper.messageJson(parser.food_visiond(@response))
+           render json: jsonHelper.messageJson(parser.food_visionTomorrow)
            
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링

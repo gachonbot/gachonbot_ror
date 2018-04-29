@@ -34,7 +34,7 @@ class Parser
     end
     
     def food_art
-        if @@day_value == 7
+        if @@day_value == 6 or @@day_value == 7
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
@@ -69,92 +69,40 @@ class Parser
         end
     end
     
-    def food_artd(day)
-        day = day.split(" ").first
-        case day
-      when "월요일"   
-        day = 1
-      when "화요일"    
-        day = 2
-      when "수요일"
-        day = 3
-      when "목요일"
-        day = 4
-      when "금요일"
-        day = 5
-      when "토요일"
-        day = 6
-      when "일요일"
-        day = 7        
-        end
-      
-        if day == 6 or day == 7
+    def food_artTomorrow
+        if @@day_value == 5 or @@day_value == 6
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{day}]/dl/dd[1]")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value+1}]/dl/dd[1]")
             return info.text.gsub("\r", "\r\n")
         end
     end
     
-    def food_edud(day)
-        day = day.split(" ").first
-        case day
-      when "월요일"   
-        day = 1
-      when "화요일"    
-        day = 2
-      when "수요일"
-        day = 3
-      when "목요일"
-        day = 4
-      when "금요일"
-        day = 5
-      when "토요일"
-        day = 6
-      when "일요일"
-        day = 7        
-        end
-        if day == 6 or day == 7
+    def food_eduTomorrow
+        if @@day_value == 5 or @@day_value == 6
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=B"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{day}]/dl")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value+1}]/dl")
            return info.text.gsub("\r", "\r\n")
-       end
+        end
     end
     
-    def food_visiond(day)
-        day = day.split(" ").first
-        case day
-      when "월요일"   
-        day = 1
-      when "화요일"    
-        day = 2
-      when "수요일"
-        day = 3
-      when "목요일"
-        day = 4
-      when "금요일"
-        day = 5
-      when "토요일"
-        day = 6
-      when "일요일"
-        day = 7        
-        end
-        if day == 6 or day == 7
+    def food_visionTomorrow
+        if @@day_value == 5 or @@day_value == 6
             return "주말은 운영하지 않습니다!"
         else
          url ="http://m.gachon.ac.kr/menu/menu.jsp?gubun=C"
             page = RestClient.get(url)
            doc = Nokogiri::HTML(page)
-           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value}]/dl")
+           info = doc.xpath("//*[@id=\"toggle-view\"]/li[#{@@day_value+1}]/dl")
            return info.text.gsub("\r", "\r\n")
-       end
+        end
     end
     
     def parse_library

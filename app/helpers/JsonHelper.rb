@@ -45,10 +45,10 @@ class JsonHelper
         return @msg
     end
     
-    def dayfoodJson
+    def tomorrowfoodJson
         @msg = {
               message: {
-                  text: "학식을 알려드릴게요! 건물을 선택해 주세요!"
+                  text: "내일의 학식을 알려드릴게요! 건물을 선택해 주세요!"
               },
               keyboard: {
                 type: "buttons",
