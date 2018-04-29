@@ -101,7 +101,7 @@ class BasicController < ApplicationController
             
         
         elsif @response.include? "무당이"
-            if @response.include? "언제와" || "시간"
+            if @response.include? "언제와" or "시간"
             render json: jsonHelper.moodangJson
             end
             
