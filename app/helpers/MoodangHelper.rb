@@ -10,7 +10,7 @@ upArrival = up.find { |e| e > Time.now.strftime("%hour%min").to_i }
     when 4
         upArrival = upArrival.to_s.insert(2, '시')+"분"
     end
-    return "다음 무당이 도착 시간은 \n #{upArrival} 입니다"
+    return "다음 무당이 도착시간은 \n #{upArrival} 입니다"
   end
     
 end

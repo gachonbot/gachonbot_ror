@@ -41,7 +41,7 @@ class BasicController < ApplicationController
 
         #오늘의 학식 기능
         #가천대학교 홈페이지 크롤링
-        elsif @response.include? "학식"
+        elsif @response.include? "학식"&&"오늘"
             render json: jsonHelper.foodJson
             
         #예술대학 학식    
@@ -55,6 +55,21 @@ class BasicController < ApplicationController
         #비전타워 학식
         elsif @response == " 비전타워"
            render json: jsonHelper.messageJson(parser.food_vision)
+           
+       elsif @response.include? "학식"&&"요일"
+            render json: jsonHelper.dayfoodJson
+            
+        #예술대학 학식    
+        elsif @response == "  예술대학"
+            render json: jsonHelper.messageJson(parser.food_art(@response))
+            
+        #교육대학원 학식
+        elsif @response == "  교육대학원"
+            render json: jsonHelper.messageJson(parser.food_edu(@response))
+            
+        #비전타워 학식
+        elsif @response == "  비전타워"
+           render json: jsonHelper.messageJson(parser.food_vision(@response))
            
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링
@@ -170,7 +185,7 @@ class BasicController < ApplicationController
             render json: jsonHelper.messageJson(infoHelper.show_cafe)
             
         #개발자정보
-        elsif @response == "개발자"
+        elsif @response == "개발자" or @response == "만든사람"
             render json: jsonHelper.messageJson(infoHelper.show_developer)
             
         elsif @response == "이길여"
