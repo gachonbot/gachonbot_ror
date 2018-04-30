@@ -78,7 +78,7 @@ class BasicController < ApplicationController
                     
         #중앙도서관 자리 조회 기능
         #가천대학교 홈페이지 크롤링
-        elsif @response.include? "중앙도서관" && "자리"
+        elsif (@response.include? "중앙도서관" or @response.include? "중도") and (@response.include? "자리" or @response.include? "좌석")
             render json: jsonHelper.messageJson(parser.parse_library)
             
         #학사일정 조회 기능

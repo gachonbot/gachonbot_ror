@@ -6,7 +6,7 @@ class StoreHelper
    def store_info(store)
         store = store.split(" ").first
         if @Stores.find_by(name: "#{store}") == nil
-         return "등록되지 않은 장소 입니다. 등록을 원하시면 건의 부탁드립니다!"
+         return "등록되지 않은 장소 입니다. 현재 등록되있는 정보는 '가게리스트'로 확인 가능합니다. 등록을 원하시면 건의 부탁드립니다!"
         else
         @store_name = @Stores.find_by(name: "#{store}").name
         @store_number = @Stores.find_by(name: "#{store}").number
@@ -18,7 +18,7 @@ class StoreHelper
    def store_phone(store)
        store = store.split(" ").first
        if @Stores.find_by(name: "#{store}") == nil
-         return "등록되지 않은 장소 입니다. 등록을 원하시면 건의 부탁드립니다!"
+         return "등록되지 않은 장소 입니다. 현재 등록되있는 정보는 '가게리스트'로 확인 가능합니다. 등록을 원하시면 건의 부탁드립니다!"
         else
        @store_name = @Stores.find_by(name: "#{store}").name
        @store_number = @Stores.find_by(name: "#{store}").number
@@ -30,7 +30,7 @@ class StoreHelper
    def store_time(store)
        store = store.split(" ").first
        if @Stores.find_by(name: "#{store}") == nil
-         return "등록되지 않은 장소 입니다. 등록을 원하시면 건의 부탁드립니다!"
+         return "등록되지 않은 장소 입니다. 현재 등록되있는 정보는 '가게리스트'로 확인 가능합니다. 등록을 원하시면 건의 부탁드립니다!"
         else
        @store_name = @Stores.find_by(name: "#{store}").name
        @store_number = @Stores.find_by(name: "#{store}").number
