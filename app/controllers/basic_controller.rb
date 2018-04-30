@@ -73,7 +73,7 @@ class BasicController < ApplicationController
            
         #지도 조회 기능
         #가천대학교 홈페이지 크롤링
-        elsif @response == "지도"
+        elsif (@response.include? "학교" or @response.include? "캠퍼스") and (@response.include? "지도" or @response.include? "맵")
             render json: jsonHelper.labelJson("캠퍼스 지도입니다!","캠퍼스지도 보러가기","http://www.gachon.ac.kr/introduce/campus/campus_g.html")
                     
         #중앙도서관 자리 조회 기능
