@@ -192,7 +192,10 @@ class BasicController < ApplicationController
             render json: jsonHelper.messageJson(infoHelper.show_boss)
             
         elsif @response.include? "허승회"
-            render json: jsonHelper.messageJson("컴퓨터공학과 14학번")
+            render json: jsonHelper.messageJson("컴퓨터공학과 14학번 머리긴애?")
+            
+        elsif @response.include? "한승우"
+            render json: jsonHelper.messageJson("이거만든사람")
             
         #심심이 API
         else
