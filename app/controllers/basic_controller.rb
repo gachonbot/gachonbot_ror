@@ -191,6 +191,9 @@ class BasicController < ApplicationController
         elsif @response == "이길여"
             render json: jsonHelper.messageJson(infoHelper.show_boss)
             
+        elsif @response.include? "허승회"
+            render json: jsonHelper.messageJson("컴퓨터공학과 14학번")
+            
         #심심이 API
         else
           resp = HTTParty.get("http://api.simsimi.com/request.p?key=e7501386-fca8-4723-b278-36755e917526&lc=ko&ft=1.0&text=#{CGI.escape(@response)}")
