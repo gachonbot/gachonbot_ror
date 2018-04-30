@@ -1,24 +1,85 @@
-# README
+# 가천봇
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 가천봇?
 
-Things you may want to cover:
+가천봇은 카카오 자동응답 기반 대화형 챗봇입니다.
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+지하철은 카카오지하철, 학식은 가천대 스마트캠퍼스,
 
-* Database creation
+미세먼지는 네이버 날씨, 장소검색은 카카오맵...
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+'가천봇'은 모든 것을 대답해 줍니다!
 
-* Deployment instructions
+​     
 
-* ...
+여러분들이 언제나 함께하고 있는 카카오톡에서, 
+
+'가천봇'을 이용해보세요!
+
+​     
+
+지하철 언제와? 중앙도서관 자리 얼마나 있어? 날씨 어때? 강남역까지 어떻게 가? 무당이 언제와? 학사일정 알려줘!
+
+​     
+
+여러분들이 어떤 말을 하던 절대 씹지 않는 '가천봇'은, 
+
+위와 같은 모든 질문들에 대한 답을 제공합니다!
+
+
+
+'가천봇'을 통해, 더욱 편리한 캠퍼스 라이프를 즐겨보세요!
+
+## 이용방법
+
+1. 카카오톡 실행
+2. 상단 검색창 터치
+3. 검색창에 가천봇 검색
+
+ or
+
+http://pf.kakao.com/_xgdKxfC
+
+
+
+## 주요기능
+
+1. 오늘, 내일 학식정보 조회
+2. 가천대에서 특정 지하철역까지의 최단경로 조회
+3. 가천대역 실시간 도착정보 조회
+4. 가천대의 현재날씨정보 조회
+
+5. 가천대의 현재미세먼지정보 조회
+
+
+6. 현재 중앙도서관 열람실 남은 좌석 조회
+7. 현재 시간을 기준으로 다음 무당이(셔틀버스) 도착정보 조회
+8. 요번 달의 학사정보 조회
+9. 학교 홈페이지의 최근 공지사항 조회
+10. 학교 홈페이지의 최근 장학소식 조회
+11. 캠퍼스맵 조회
+12. 학과 과사무실 전화번호 조회
+13. 가천대 주변 장소에 대한 정보(전화번호, 영업시간) 조회
+14. 각종 학교 관련 정보 조회
+15. 가천대 주변 버스정류장 실시간 버스도착 정보 조회(추후 추가될 예정입니다.)
+
+
+
+## 개발환경
+
+Ruby On Rails + Heroku + Postgres DB
+
+## 개발자
+
+가천대학교 컴퓨터공학과 14학번 한승우
+
+010-9939-4434
+
+tuguri8@gmail.com
+
+
+
